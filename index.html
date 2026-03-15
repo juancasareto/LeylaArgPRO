@@ -1565,22 +1565,15 @@ input[type=range]::-moz-range-thumb {
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
                 <div>
                   <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Años</div>
-                  <div class="emp-btns" id="indem-anios-btns">
-                    <button class="emp-btn" onclick="selectAnios(0,this)">0</button>
-                    <button class="emp-btn active" onclick="selectAnios(2,this)">2</button>
-                    <button class="emp-btn" onclick="selectAnios(5,this)">5</button>
-                    <button class="emp-btn" onclick="selectAnios(10,this)">10</button>
-                    <button class="emp-btn" onclick="selectAnios(20,this)">20</button>
-                  </div>
+                  <input type="number" id="indem-anios-input" min="0" max="40" value="2"
+                    oninput="calcIndem()"
+                    style="width:100%;padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:15px;font-family:var(--font-mono);font-weight:500;color:var(--text);background:var(--bg);outline:none">
                 </div>
                 <div>
                   <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Meses adicionales</div>
-                  <div class="emp-btns" id="indem-meses-btns">
-                    <button class="emp-btn active" onclick="selectMeses(0,this)">0</button>
-                    <button class="emp-btn" onclick="selectMeses(3,this)">3</button>
-                    <button class="emp-btn" onclick="selectMeses(6,this)">6</button>
-                    <button class="emp-btn" onclick="selectMeses(9,this)">9</button>
-                  </div>
+                  <input type="number" id="indem-meses-input" min="0" max="11" value="0"
+                    oninput="calcIndem()"
+                    style="width:100%;padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:15px;font-family:var(--font-mono);font-weight:500;color:var(--text);background:var(--bg);outline:none">
                 </div>
               </div>
             </div>
@@ -2210,23 +2203,7 @@ function onChatKey(e) {
 }
 
 // ===== CALCULADORA INDEMNIZACIÓN =====
-let indemAnios = 2;
-let indemMeses = 0;
 let trabajadorRegistrado = true;
-
-function selectAnios(n, btn) {
-  indemAnios = n;
-  document.querySelectorAll('#indem-anios-btns .emp-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  calcIndem();
-}
-
-function selectMeses(n, btn) {
-  indemMeses = n;
-  document.querySelectorAll('#indem-meses-btns .emp-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  calcIndem();
-}
 
 function toggleRegistrado() {
   trabajadorRegistrado = !trabajadorRegistrado;
@@ -2240,6 +2217,8 @@ function toggleRegistrado() {
 function calcIndem() {
   const sal = parseInt(document.getElementById('indem-sal-slider').value);
   const dia = parseInt(document.getElementById('indem-dia-slider').value);
+  const indemAnios  = Math.max(0, parseInt(document.getElementById('indem-anios-input').value)  || 0);
+  const indemMeses  = Math.max(0, Math.min(11, parseInt(document.getElementById('indem-meses-input').value) || 0));
 
   document.getElementById('indem-sal-display').textContent = '$' + sal.toLocaleString('es-AR');
   document.getElementById('indem-dia-display').textContent = 'Día ' + dia;
