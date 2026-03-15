@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ley Laboral Argentina — Consultor IA PRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg: #ffffff;
+  --bg2: #f7f6f3;
+  --bg3: #f0ede8;
+  --border: rgba(0,0,0,0.10);
+  --border2: rgba(0,0,0,0.18);
+  --border3: rgba(0,0,0,0.28);
+  --text: #1a1917;
+  --text2: #5a5854;
+  --text3: #9c9890;
+  --success: #2d6b19;
+  --success-bg: #eaf3de;
+  --success-border: rgba(45,107,25,0.25);
+  --danger: #8b1f1f;
+  --danger-bg: #fcebeb;
+  --danger-border: rgba(139,31,31,0.25);
+  --warning: #7a4a08;
+  --warning-bg: #faeeda;
+  --warning-border: rgba(122,74,8,0.25);
+  --info: #0d4a8a;
+  --info-bg: #e6f1fb;
+  --info-border: rgba(13,74,138,0.25);
+  --purple: #534AB7;
+  --purple-bg: #EEEDFE;
+  --purple-border: rgba(83,74,183,0.25);
+  --accent: #1a1917;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+button { cursor: pointer; font-family: var(--font); }
+input, textarea { font-family: var(--font); }
+
+/* ===== LAYOUT ===== */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#app-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  height: 52px;
+  border-bottom: 0.5px solid var(--border2);
+  flex-shrink: 0;
+  background: var(--bg);
+}
+.header-logo {
+  font-size: 18px;
+  line-height: 1;
+}
+.header-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+.header-sub {
+  font-size: 12px;
+  color: var(--text3);
+  margin-left: 2px;
+}
+.header-spacer { flex: 1; }
+.badge-vigente {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--success);
+  background: var(--success-bg);
+  border: 0.5px solid var(--success-border);
+  border-radius: 20px;
+  padding: 3px 9px;
+}
+
+#app-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ===== SIDEBAR ===== */
+#sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  border-right: 0.5px solid var(--border2);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  overflow-y: auto;
+  background: var(--bg);
+}
+.nav-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 14px 6px;
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 14px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 400;
+  text-align: left;
+  border-radius: 0;
+  transition: background 0.1s, color 0.1s;
+}
+.nav-btn:hover { background: var(--bg2); color: var(--text); }
+.nav-btn.active { background: var(--bg3); color: var(--text); font-weight: 500; }
+.nav-btn .nav-icon { font-size: 14px; width: 18px; text-align: center; }
+.sidebar-footer {
+  margin-top: auto;
+  padding: 12px 14px 4px;
+  font-size: 10px;
+  color: var(--text3);
+  line-height: 1.4;
+  border-top: 0.5px solid var(--border);
+}
+
+/* ===== CONTENT ===== */
+#content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--bg);
+}
+.section { display: none; }
+.section.active { display: block; }
+.section-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.section-desc {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 20px;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--bg);
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+.metric-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.metric-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.metric-sub {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.3;
+}
+
+/* ===== GRIDS ===== */
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 16px; }
+.grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ===== ALERT BOXES ===== */
+.alert-box {
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--border2);
+  background: var(--bg2);
+}
+.alert-box.a-danger { background: var(--danger-bg); border-color: var(--danger-border); }
+.alert-box.a-warn   { background: var(--warning-bg); border-color: var(--warning-border); }
+.alert-box.a-info   { background: var(--info-bg); border-color: var(--info-border); }
+.alert-box.a-success{ background: var(--success-bg); border-color: var(--success-border); }
+.alert-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.a-danger .alert-title { color: var(--danger); }
+.a-warn .alert-title   { color: var(--warning); }
+.a-info .alert-title   { color: var(--info); }
+.a-success .alert-title{ color: var(--success); }
+.alert-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ===== BADGES ===== */
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 2px 8px;
+}
+.b-high { color: var(--danger);  background: var(--danger-bg);  border: 0.5px solid var(--danger-border); }
+.b-med  { color: var(--warning); background: var(--warning-bg); border: 0.5px solid var(--warning-border); }
+
+/* ===== QUICK ACCESS BUTTONS ===== */
+.quick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 14px;
+  background: var(--bg);
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  transition: background 0.1s, border-color 0.15s;
+  width: 100%;
+}
+.quick-btn:hover { background: var(--bg2); border-color: var(--border3); }
+.quick-btn-icon { font-size: 20px; }
+.quick-btn-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+.quick-btn-desc {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.3;
+}
+
+/* ===== SECTION 2: COMPARATIVA ===== */
+.pill-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.pill {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 0.5px solid var(--border2);
+  background: var(--bg);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text2);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+.pill:hover { background: var(--bg2); color: var(--text); }
+.pill.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 500;
+}
+
+.accordion-item {
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-lg);
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--bg);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s;
+}
+.accordion-header:hover { background: var(--bg2); }
+.accordion-title { font-size: 13px; font-weight: 500; color: var(--text); flex: 1; }
+.accordion-category {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.accordion-arrow {
+  font-size: 12px;
+  color: var(--text3);
+  transition: transform 0.2s;
+}
+.accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+.accordion-body {
+  display: none;
+  padding: 0 16px 16px;
+  background: var(--bg);
+}
+.accordion-item.open .accordion-body { display: block; }
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+.compare-col {
+  padding: 12px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.compare-col.antes {
+  background: var(--danger-bg);
+  border: 0.5px solid var(--danger-border);
+  color: var(--text);
+}
+.compare-col.ahora {
+  background: var(--success-bg);
+  border: 0.5px solid var(--success-border);
+  color: var(--text);
+}
+.compare-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.compare-col.antes .compare-label { color: var(--danger); }
+.compare-col.ahora .compare-label { color: var(--success); }
+
+/* ===== SECTION 3: CALCULADORA ===== */
+.calc-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; }
+.calc-input-group { margin-bottom: 20px; }
+.calc-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+.calc-value {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid white;
+  box-shadow: 0 0 0 1px var(--border3);
+  cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid white;
+  cursor: pointer;
+}
+.emp-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.emp-btn {
+  padding: 6px 14px;
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius);
+  background: var(--bg);
+  font-size: 13px;
+  color: var(--text2);
+  font-weight: 400;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+.emp-btn:hover { background: var(--bg2); color: var(--text); }
+.emp-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  font-weight: 500;
+}
+.cond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cond-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  background: var(--bg2);
+  border-radius: var(--radius);
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+.cond-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--info);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.hero-card {
+  text-align: center;
+  padding: 24px 16px;
+  background: var(--bg2);
+  border-radius: var(--radius-lg);
+  margin-bottom: 12px;
+}
+.hero-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.hero-value {
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--success);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.hero-sub { font-size: 12px; color: var(--text3); }
+
+.compare-rates {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.rate-item {
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: var(--radius);
+  background: var(--bg2);
+}
+.rate-value { font-family: var(--font-mono); font-size: 16px; font-weight: 500; line-height: 1.2; }
+.rate-label { font-size: 10px; color: var(--text3); margin-top: 2px; }
+.rate-item.gen .rate-value { color: var(--danger); }
+.rate-item.rifl .rate-value { color: var(--success); }
+.rate-item.ahorro .rate-value { color: var(--warning); }
+
+.proj-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.proj-item {
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: var(--radius);
+  background: var(--bg2);
+}
+.proj-value { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.2; }
+.proj-label { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+/* ===== SECTION 4: BLINDAJE ===== */
+.progress-card {
+  background: var(--bg);
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.prog-pct {
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--danger);
+  line-height: 1;
+  transition: color 0.3s;
+}
+.prog-pct.med { color: var(--warning); }
+.prog-pct.full { color: var(--success); }
+.prog-count {
+  font-size: 13px;
+  color: var(--text3);
+  margin-bottom: 14px;
+  margin-top: 2px;
+}
+.prog-wrap {
+  width: 100%;
+  height: 6px;
+  background: var(--bg3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--danger);
+  width: 0%;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+.prog-fill.med { background: var(--warning); }
+.prog-fill.full { background: var(--success); }
+.prog-success {
+  display: none;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--success);
+}
+.prog-success.visible { display: block; }
+
+.checklist-section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+.checklist-section-label.mandatory { color: var(--danger); }
+.checklist-section-label.optional  { color: var(--warning); }
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  background: var(--bg);
+  user-select: none;
+}
+.check-item:hover { background: var(--bg2); }
+.check-item.done {
+  background: var(--success-bg);
+  border-color: var(--success-border);
+}
+.check-box {
+  width: 18px;
+  height: 18px;
+  border: 0.5px solid var(--border3);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: transparent;
+  background: var(--bg);
+  margin-top: 1px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.check-item.done .check-box {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+}
+.check-content {}
+.check-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+  transition: color 0.15s;
+}
+.check-item.done .check-title {
+  text-decoration: line-through;
+  color: var(--text3);
+}
+.check-desc {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* ===== SECTION 5: PLAN ===== */
+.plan-section { margin-bottom: 16px; }
+.plan-header {
+  padding: 12px 16px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border: 0.5px solid var(--border2);
+}
+.plan-header.immediate { background: var(--danger-bg); border-color: var(--danger-border); }
+.plan-header.short     { background: var(--warning-bg); border-color: var(--warning-border); }
+.plan-header.medium    { background: var(--success-bg); border-color: var(--success-border); }
+.plan-header-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.plan-header-icon { font-size: 16px; }
+.plan-header-title { font-size: 14px; font-weight: 500; }
+.immediate .plan-header-title { color: var(--danger); }
+.short .plan-header-title { color: var(--warning); }
+.medium .plan-header-title { color: var(--success); }
+.plan-header-sub { font-size: 12px; color: var(--text3); }
+.plan-body {
+  border: 0.5px solid var(--border2);
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden;
+}
+.plan-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid var(--border);
+}
+.plan-item:last-child { border-bottom: none; }
+.plan-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text3);
+  width: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.plan-item-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.plan-item-desc  { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* ===== SECTION 6: CONSULTOR IA ===== */
+.chat-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--success-bg);
+  border: 0.5px solid var(--success-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--success);
+}
+.chat-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  flex-shrink: 0;
+}
+.suggested-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.sug-pill {
+  padding: 6px 12px;
+  border: 0.5px solid var(--border2);
+  border-radius: 20px;
+  background: var(--bg2);
+  font-size: 12px;
+  color: var(--text2);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, border-color 0.15s;
+}
+.sug-pill:hover { background: var(--bg3); color: var(--text); border-color: var(--border3); }
+
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 280px;
+  max-height: 400px;
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg);
+}
+.msg-u {
+  align-self: flex-end;
+  max-width: 72%;
+  background: var(--accent);
+  color: white;
+  padding: 10px 14px;
+  border-radius: var(--radius-lg) var(--radius-lg) 2px var(--radius-lg);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.msg-ai-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: flex-start;
+  max-width: 80%;
+}
+.msg-ai-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 0.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.msg-ai {
+  background: var(--bg2);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 2px var(--radius-lg) var(--radius-lg) var(--radius-lg);
+  border-left: 0.5px solid var(--border2);
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Typing indicator */
+.typing-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.typing-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--bg2);
+  border-radius: 2px var(--radius-lg) var(--radius-lg) var(--radius-lg);
+  border-left: 0.5px solid var(--border2);
+}
+.typing-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text3);
+  display: inline-block;
+  animation: typingBounce 1.2s infinite ease-in-out;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+.chat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 8px 8px 8px 14px;
+  background: var(--bg);
+}
+.chat-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--text);
+  resize: none;
+  height: 22px;
+  line-height: 1.5;
+}
+.chat-input::placeholder { color: var(--text3); }
+.send-btn {
+  padding: 7px 14px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.send-btn:hover { opacity: 0.85; }
+.send-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.chat-disclaimer {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* ===== MOBILE NAV ===== */
+#mobile-nav {
+  display: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-bottom: 0.5px solid var(--border2);
+  flex-shrink: 0;
+  background: var(--bg);
+  scrollbar-width: none;
+}
+#mobile-nav::-webkit-scrollbar { display: none; }
+.mobile-nav-inner {
+  display: flex;
+  padding: 8px 12px;
+  gap: 6px;
+  white-space: nowrap;
+}
+.mnav-btn {
+  padding: 6px 12px;
+  border: 0.5px solid var(--border2);
+  border-radius: 20px;
+  background: var(--bg);
+  font-size: 12px;
+  color: var(--text2);
+  white-space: nowrap;
+  transition: background 0.1s, color 0.1s;
+}
+.mnav-btn:hover { background: var(--bg2); color: var(--text); }
+.mnav-btn.active { background: var(--accent); color: white; border-color: var(--accent); font-weight: 500; }
+
+/* ===== DIVIDER ===== */
+.divider { height: 0.5px; background: var(--border); margin: 20px 0; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+  #sidebar { display: none; }
+  #mobile-nav { display: block; }
+  #app-layout { flex-direction: column; }
+  #content { padding: 16px; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .calc-layout { grid-template-columns: 1fr; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .compare-rates { grid-template-columns: 1fr; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .cond-grid { grid-template-columns: 1fr; }
+  .header-sub { display: none; }
+  .msg-u { max-width: 88%; }
+  .msg-ai-wrap { max-width: 92%; }
+}
+@media (max-width: 420px) {
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .header-title { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- HEADER -->
+  <header id="app-header">
+    <span class="header-logo">⚖️</span>
+    <div>
+      <span class="header-title">Ley Laboral Argentina</span>
+      <span class="header-sub">— Consultor IA PRO</span>
+    </div>
+    <div class="header-spacer"></div>
+    <span class="badge-vigente">Vigente</span>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <nav id="mobile-nav">
+    <div class="mobile-nav-inner">
+      <button class="mnav-btn active" onclick="showSection('inicio', this)">Inicio</button>
+      <button class="mnav-btn" onclick="showSection('comparativa', this)">Comparativa</button>
+      <button class="mnav-btn" onclick="showSection('calculadora', this)">Calculadora RIFL</button>
+      <button class="mnav-btn" onclick="showSection('blindaje', this)">Blindaje Art. 30</button>
+      <button class="mnav-btn" onclick="showSection('plan', this)">Plan de acción</button>
+      <button class="mnav-btn" onclick="showSection('consultor', this)">Consultor IA</button>
+    </div>
+  </nav>
+
+  <div id="app-layout">
+
+    <!-- SIDEBAR -->
+    <nav id="sidebar">
+      <div class="nav-label">Módulos</div>
+      <button class="nav-btn active" onclick="showSection('inicio', this)" data-section="inicio">
+        <span class="nav-icon">🏠</span> Inicio
+      </button>
+      <button class="nav-btn" onclick="showSection('comparativa', this)" data-section="comparativa">
+        <span class="nav-icon">⚖️</span> Comparativa
+      </button>
+      <button class="nav-btn" onclick="showSection('calculadora', this)" data-section="calculadora">
+        <span class="nav-icon">📊</span> Calculadora RIFL
+      </button>
+      <button class="nav-btn" onclick="showSection('blindaje', this)" data-section="blindaje">
+        <span class="nav-icon">🛡️</span> Blindaje Art. 30
+      </button>
+      <button class="nav-btn" onclick="showSection('plan', this)" data-section="plan">
+        <span class="nav-icon">📋</span> Plan de acción
+      </button>
+      <button class="nav-btn" onclick="showSection('consultor', this)" data-section="consultor">
+        <span class="nav-icon">💬</span> Consultor IA
+      </button>
+      <div class="sidebar-footer">
+        Basado en análisis jurídico especializado · Ley 27.802 · Corte: 13/03/2026
+      </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main id="content">
+
+      <!-- ===== SECCIÓN 1: INICIO ===== -->
+      <section id="s-inicio" class="section active">
+        <div class="section-title">Ley 27.802 — Modernización laboral</div>
+        <div class="section-desc">Resumen ejecutivo de los cambios clave para PyMEs. Vigencia desde el 06/03/2026.</div>
+
+        <!-- Metric cards -->
+        <div class="grid-4">
+          <div class="metric-card">
+            <div class="metric-value" style="color:var(--success)">0%</div>
+            <div class="metric-label">Multas por no registración</div>
+            <div class="metric-sub">Arts. 8–17 Ley 24.013 derogados</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" style="color:var(--info)">5%</div>
+            <div class="metric-label">Contribuciones con RIFL</div>
+            <div class="metric-sub">vs. 17–23% régimen general</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" style="color:var(--warning)">6 m.</div>
+            <div class="metric-label">Período de prueba</div>
+            <div class="metric-sub">Extensible a 8 o 12 meses por CCT</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" style="color:var(--purple)">70%+</div>
+            <div class="metric-label">Condonación PER mínima</div>
+            <div class="metric-sub">Hasta 100% en MiPyMEs</div>
+          </div>
+        </div>
+
+        <!-- Alert boxes -->
+        <div class="grid-2">
+          <div class="alert-box a-danger">
+            <div class="alert-title">⚠ Riesgo residual crítico</div>
+            <div class="alert-text">Las multas están derogadas pero subsiste el riesgo de <strong>"daño generado"</strong> (arts. 1716–1738 CCyCN) estimado entre 1 y 3 veces el Art. 245. Solución: adherir al PER apenas se reglamente.</div>
+          </div>
+          <div class="alert-box a-warn">
+            <div class="alert-title">⏳ Pendientes de reglamentación</div>
+            <div class="alert-text"><strong>FAL</strong> (jun. 2026) · <strong>RIFL</strong> (may. 2026) · <strong>PER</strong> (180 días desde reglamentación) · <strong>Colaboradores Art. 97</strong>. Mantenete atento a los boletines oficiales.</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Quick access -->
+        <div style="font-size:11px;font-weight:500;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Acceso rápido</div>
+        <div class="grid-4">
+          <button class="quick-btn" onclick="showSection('comparativa')">
+            <span class="quick-btn-icon">⚖️</span>
+            <span class="quick-btn-label">Ley vieja vs nueva</span>
+            <span class="quick-btn-desc">12 cambios con antes/después</span>
+          </button>
+          <button class="quick-btn" onclick="showSection('calculadora')">
+            <span class="quick-btn-icon">📊</span>
+            <span class="quick-btn-label">Calculadora RIFL</span>
+            <span class="quick-btn-desc">Proyectá tu ahorro en contribuciones</span>
+          </button>
+          <button class="quick-btn" onclick="showSection('blindaje')">
+            <span class="quick-btn-icon">🛡️</span>
+            <span class="quick-btn-label">Blindaje Art. 30</span>
+            <span class="quick-btn-desc">Checklist mensual para contratistas</span>
+          </button>
+          <button class="quick-btn" onclick="showSection('plan')">
+            <span class="quick-btn-icon">📋</span>
+            <span class="quick-btn-label">Plan de acción</span>
+            <span class="quick-btn-desc">Hoja de ruta en 3 etapas</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ===== SECCIÓN 2: COMPARATIVA ===== -->
+      <section id="s-comparativa" class="section">
+        <div class="section-title">Ley vieja vs nueva</div>
+        <div class="section-desc">Comparativa de los 12 cambios más relevantes. Hacé click en cada ítem para ver el detalle.</div>
+
+        <div class="pill-filters" id="pill-filters">
+          <button class="pill active" onclick="filterAccordion('todos', this)">Todos</button>
+          <button class="pill" onclick="filterAccordion('sanciones', this)">Sanciones</button>
+          <button class="pill" onclick="filterAccordion('solidaridad', this)">Solidaridad</button>
+          <button class="pill" onclick="filterAccordion('contratacion', this)">Contratación</button>
+          <button class="pill" onclick="filterAccordion('despido', this)">Despido</button>
+          <button class="pill" onclick="filterAccordion('procesal', this)">Procesal</button>
+          <button class="pill" onclick="filterAccordion('facultades', this)">Facultades</button>
+        </div>
+
+        <div id="accordion-list">
+
+          <!-- 1 -->
+          <div class="accordion-item" data-cat="contratacion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Período de prueba</span>
+              <span class="accordion-category">Contratación</span>
+              <span class="badge b-high">ALTO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  3 meses. Preaviso de 15 días obligatorio al rescindir durante la prueba.
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  6 meses por defecto. Por CCT: 8 meses (6–100 empleados) o 12 meses (hasta 5 empleados). Sin preaviso ni indemnización.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="accordion-item" data-cat="sanciones">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Multas por no registración</span>
+              <span class="accordion-category">Sanciones</span>
+              <span class="badge b-high">ALTO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Arts. 8–17 Ley 24.013 (3–5× indemnización). Art. 2 Ley 25.323 (duplicación Art. 245).
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  <strong>DEROGADAS</strong> para contratos extinguidos desde 06/03/2026. Subsiste riesgo de "daño generado" vía arts. 1716–1738 CCyCN (1–3× Art. 245). Solución: adherir al PER.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="accordion-item" data-cat="solidaridad">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Solidaridad en tercerización — Art. 30</span>
+              <span class="accordion-category">Solidaridad</span>
+              <span class="badge b-high">ALTO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Principal solidario aunque hubiera exigido documentación. Obligación "de resultado".
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  Actividades accesorias <strong>excluidas</strong>. Checklist documental mensual <strong>exime totalmente</strong>. Sin responsabilidad ante documentación falsa de la contratista.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="accordion-item" data-cat="solidaridad">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Grupos económicos — Art. 31</span>
+              <span class="accordion-category">Solidaridad</span>
+              <span class="badge b-high">ALTO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Solidaridad objetiva por ser empresa vinculada o controlada.
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  Solo <strong>fraude</strong> o conducción temeraria que derive en insolvencia genera solidaridad.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="accordion-item" data-cat="solidaridad">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Transferencia de establecimiento — Art. 228</span>
+              <span class="accordion-category">Solidaridad</span>
+              <span class="badge b-high">ALTO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Adquirente respondía por TODAS las deudas laborales sin límite.
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  Responsabilidad limitada a lo que "debió o pudo conocer". <strong>Due diligence laboral = blindaje jurídico completo.</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="accordion-item" data-cat="despido">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Indemnización por despido — Art. 245</span>
+              <span class="accordion-category">Despido</span>
+              <span class="badge b-med">MEDIO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  1 mes/año. Acumulable con acciones civiles por daños y perjuicios.
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  Misma fórmula pero es la <strong>ÚNICA reparación procedente</strong>. Extingue cualquier reclamo civil vinculado al despido. Codifica Vizzoti (piso 67%).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7 -->
+          <div class="accordion-item" data-cat="procesal">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Actualización de sentencias — Art. 55</span>
+              <span class="accordion-category">Procesal</span>
+              <span class="badge b-high">ALTO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Tasa activa BNA: 200–400% anual efectivo. Anatocismo (capitalización de intereses).
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  Tasa pasiva BCRA + IPC + 3% (tope). Piso: 67% del tope. Elimina anatocismo. <strong>Aplica a juicios en trámite.</strong> Hay planteos de inconstitucionalidad activos.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8 -->
+          <div class="accordion-item" data-cat="procesal">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Pluspetición inexcusable — Art. 20</span>
+              <span class="accordion-category">Procesal</span>
+              <span class="badge b-high">ALTO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Trabajador podía reclamar cualquier suma sin riesgo de costas.
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  Pluspetición inexcusable (sobreestimación objetiva) → <strong>costas solidarias entre trabajador Y su abogado.</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9 -->
+          <div class="accordion-item" data-cat="facultades">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Ius variandi — Art. 66</span>
+              <span class="accordion-category">Facultades</span>
+              <span class="badge b-med">MEDIO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Prohibido causar perjuicio material o moral al empleado.
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  Se <strong>elimina</strong> la prohibición de perjuicio moral. Solo se prohíbe el perjuicio material.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10 -->
+          <div class="accordion-item" data-cat="sanciones">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Certificados de trabajo — Art. 80</span>
+              <span class="accordion-category">Sanciones</span>
+              <span class="badge b-med">MEDIO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Multa de 3 remuneraciones si no se entregaban en 30 días.
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  Multa <strong>DEROGADA</strong>. Plazo ampliado a 45 días hábiles.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11 -->
+          <div class="accordion-item" data-cat="sanciones">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Retención de aportes — Art. 132 bis</span>
+              <span class="accordion-category">Sanciones</span>
+              <span class="badge b-med">MEDIO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Sanción conminatoria de 1 salario/mes hasta regularización.
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  <strong>DEROGADO.</strong> Solo subsiste la obligación de depositar los aportes.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12 -->
+          <div class="accordion-item" data-cat="contratacion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Presunción de laboralidad — Art. 23</span>
+              <span class="accordion-category">Contratación</span>
+              <span class="badge b-med">MEDIO</span>
+              <span class="accordion-arrow">▾</span>
+            </div>
+            <div class="accordion-body">
+              <div class="compare-grid">
+                <div class="compare-col antes">
+                  <div class="compare-label">Antes</div>
+                  Presunción amplia ante cualquier prestación de servicios.
+                </div>
+                <div class="compare-col ahora">
+                  <div class="compare-label">Ahora</div>
+                  Requiere acreditar "dependencia". <strong>NO aplica</strong> si hay facturas + pagos bancarios documentados.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /accordion-list -->
+      </section>
+
+      <!-- ===== SECCIÓN 3: CALCULADORA RIFL ===== -->
+      <section id="s-calculadora" class="section">
+        <div class="section-title">Calculadora RIFL</div>
+        <div class="section-desc">Régimen de incentivo a la formalización laboral. Proyectá tu ahorro en contribuciones patronales.</div>
+
+        <div class="calc-layout">
+          <!-- Left: inputs -->
+          <div>
+            <div class="calc-input-group">
+              <label class="calc-label">Salario bruto mensual</label>
+              <div class="calc-value" id="sal-display">$500.000</div>
+              <input type="range" id="sal-slider" min="200000" max="2000000" step="50000" value="500000" oninput="calcRIFL()">
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px;font-family:var(--font-mono)">
+                <span>$200k</span><span>$2M</span>
+              </div>
+            </div>
+
+            <div class="calc-input-group">
+              <label class="calc-label">Cantidad de empleados RIFL</label>
+              <div class="emp-btns" id="emp-btns">
+                <button class="emp-btn" onclick="selectEmp(1,this)">1</button>
+                <button class="emp-btn active" onclick="selectEmp(3,this)">3</button>
+                <button class="emp-btn" onclick="selectEmp(5,this)">5</button>
+                <button class="emp-btn" onclick="selectEmp(10,this)">10</button>
+                <button class="emp-btn" onclick="selectEmp(20,this)">20</button>
+              </div>
+            </div>
+
+            <div class="calc-input-group">
+              <label class="calc-label">Condiciones del trabajador (RIFL)</label>
+              <div class="cond-grid">
+                <div class="cond-item"><span class="cond-dot"></span>Sin relación laboral registrada al 10/12/2025</div>
+                <div class="cond-item"><span class="cond-dot"></span>Desempleado los 6 meses previos al alta</div>
+                <div class="cond-item"><span class="cond-dot"></span>Inscripto como monotributista</div>
+                <div class="cond-item"><span class="cond-dot"></span>Último empleo en el sector público</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: results -->
+          <div>
+            <div class="hero-card">
+              <div class="hero-label">Ahorro total en 48 meses</div>
+              <div class="hero-value" id="hero-total">$691k</div>
+              <div class="hero-sub" id="hero-sub">para 3 empleados</div>
+            </div>
+
+            <div class="compare-rates" style="margin-bottom:12px">
+              <div class="rate-item gen">
+                <div class="rate-value" id="r-gen">$100k</div>
+                <div class="rate-label">Régimen general/mes</div>
+              </div>
+              <div class="rate-item rifl">
+                <div class="rate-value" id="r-rifl">$25k</div>
+                <div class="rate-label">RIFL/mes</div>
+              </div>
+              <div class="rate-item ahorro">
+                <div class="rate-value" id="r-ahorro">$75k</div>
+                <div class="rate-label">Ahorro/mes</div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom:12px">
+              <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px">Proyección total</div>
+              <div class="proj-grid">
+                <div class="proj-item">
+                  <div class="proj-value" id="p-12">$180k</div>
+                  <div class="proj-label">Anual</div>
+                </div>
+                <div class="proj-item">
+                  <div class="proj-value" id="p-24">$360k</div>
+                  <div class="proj-label">2 años</div>
+                </div>
+                <div class="proj-item">
+                  <div class="proj-value" id="p-48">$720k</div>
+                  <div class="proj-label">48 meses</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="alert-box a-warn">
+              <div class="alert-title">⏳ Pendiente de reglamentación</div>
+              <div class="alert-text" style="font-size:12px">El RIFL aún no tiene fecha de entrada en vigor. Se estima su reglamentación para mayo 2026. Los valores son proyecciones basadas en el texto de la ley.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SECCIÓN 4: BLINDAJE ART. 30 ===== -->
+      <section id="s-blindaje" class="section">
+        <div class="section-title">Blindaje Art. 30</div>
+        <div class="section-desc">Checklist mensual de documentación a exigir a tus contratistas. Completar los 7 ítems obligatorios te exime de solidaridad laboral.</div>
+
+        <div class="progress-card">
+          <div class="prog-pct" id="prog-pct">0%</div>
+          <div class="prog-count" id="prog-count">0 de 7 ítems obligatorios</div>
+          <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+          <div class="prog-success" id="prog-success">✓ Blindaje completo — quedás eximido de solidaridad laboral</div>
+        </div>
+
+        <div class="checklist-section-label mandatory">Ítems obligatorios (7)</div>
+
+        <div id="checklist-mandatory">
+          <div class="check-item" onclick="toggleCheck(this, true)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">CUIL de cada trabajador que presta servicios en el período</div>
+              <div class="check-desc">Identificación del trabajador asignado</div>
+            </div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this, true)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">F.931 con acuse de recibo del pago a la seguridad social</div>
+              <div class="check-desc">Declaración jurada mensual ante ARCA</div>
+            </div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this, true)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">Recibos de sueldo del mes firmados por cada trabajador</div>
+              <div class="check-desc">Constancia de pago de remuneraciones</div>
+            </div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this, true)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">CBU o comprobante de transferencia mensual del trabajador</div>
+              <div class="check-desc">Cuenta bancaria donde recibe su salario</div>
+            </div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this, true)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">Certificado ART con cláusula de endoso a tu favor, vigente</div>
+              <div class="check-desc">Cobertura de accidentes laborales</div>
+            </div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this, true)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">Alta en ARCA de los trabajadores que ingresan por primera vez</div>
+              <div class="check-desc">Para quienes comienzan este mes</div>
+            </div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this, true)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">Baja en ARCA de los trabajadores que dejaron de prestar</div>
+              <div class="check-desc">Para mantener actualizada la nómina</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checklist-section-label optional" style="margin-top:20px">Ítems adicionales (3)</div>
+
+        <div id="checklist-optional">
+          <div class="check-item" onclick="toggleCheck(this, false)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">Verificación trimestral en REPSAL (repsal.trabajo.gob.ar)</div>
+              <div class="check-desc">Confirmá que la contratista no tiene sanciones registradas</div>
+            </div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this, false)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">Cláusula de indemnidad en el contrato con penalidad</div>
+              <div class="check-desc">Derecho a retener el pago hasta entrega de documentación</div>
+            </div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this, false)">
+            <div class="check-box">✓</div>
+            <div class="check-content">
+              <div class="check-title">Legajo del Proveedor organizado por mes</div>
+              <div class="check-desc">Archivo digital y físico con toda la documentación</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert-box a-info" style="margin-top:16px">
+          <div class="alert-title">Regla clave — Art. 30 nuevo</div>
+          <div class="alert-text">Si la contratista entrega documentación falsa y vos la exigiste y archivaste correctamente, el Art. 30 te exime completamente de cualquier responsabilidad solidaria. Guardá todo por al menos 10 años.</div>
+        </div>
+      </section>
+
+      <!-- ===== SECCIÓN 5: PLAN DE ACCIÓN ===== -->
+      <section id="s-plan" class="section">
+        <div class="section-title">Plan de acción</div>
+        <div class="section-desc">Hoja de ruta en 3 etapas para implementar los cambios de la Ley 27.802 en tu empresa.</div>
+
+        <!-- INMEDIATO -->
+        <div class="plan-section">
+          <div class="plan-header immediate">
+            <div class="plan-header-top">
+              <span class="plan-header-icon">🔴</span>
+              <span class="plan-header-title">Inmediato</span>
+            </div>
+            <div class="plan-header-sub">Ahora mismo, sin esperar la reglamentación</div>
+          </div>
+          <div class="plan-body">
+            <div class="plan-item">
+              <div class="plan-num">01</div>
+              <div>
+                <div class="plan-item-title">Auditoría laboral interna</div>
+                <div class="plan-item-desc">Clasificá todo el plantel: correctamente registrados, mal registrados, en negro. Esta información es clave para adherir al PER cuando se reglamente.</div>
+              </div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-num">02</div>
+              <div>
+                <div class="plan-item-title">Implementar el protocolo Art. 30</div>
+                <div class="plan-item-desc">Exigí la documentación mensual a todos los contratistas antes de cada pago. El blindaje es autoejecutable desde ya, no requiere reglamentación.</div>
+              </div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-num">03</div>
+              <div>
+                <div class="plan-item-title">Revisar contratos con contratistas</div>
+                <div class="plan-item-desc">Incorporá cláusulas de indemnidad, penalidades por no entrega de documentación y derecho de retención del pago. Sin contrato no hay blindaje completo.</div>
+              </div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-num">04</div>
+              <div>
+                <div class="plan-item-title">Preparar documentación para el PER</div>
+                <div class="plan-item-desc">Reuní contratos, recibos históricos, fechas de ingreso real, categorías y salarios reales de cada empleado irregular. Cuanto más ordenada esté la info, mejor la condonación.</div>
+              </div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-num">05</div>
+              <div>
+                <div class="plan-item-title">Verificar estado en REPSAL</div>
+                <div class="plan-item-desc">Ingresá a <strong>repsal.trabajo.gob.ar</strong>. Si tu empresa figura sancionada, el PER es aún más urgente para limpiar el antecedente.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CORTO PLAZO -->
+        <div class="plan-section">
+          <div class="plan-header short">
+            <div class="plan-header-top">
+              <span class="plan-header-icon">🟡</span>
+              <span class="plan-header-title">Corto plazo</span>
+            </div>
+            <div class="plan-header-sub">Q2 2026 — al salir la reglamentación del PER y el RIFL</div>
+          </div>
+          <div class="plan-body">
+            <div class="plan-item">
+              <div class="plan-num">01</div>
+              <div>
+                <div class="plan-item-title">Adherir al PER</div>
+                <div class="plan-item-desc">Regularizá trabajadores irregulares en los 180 días desde la reglamentación. MiPyMEs: hasta 100% de condonación en Obras Sociales y ART. No esperes al último mes.</div>
+              </div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-num">02</div>
+              <div>
+                <div class="plan-item-title">Activar el RIFL para nuevas contrataciones</div>
+                <div class="plan-item-desc">5% de contribuciones en lugar del 17–23% durante 48 meses. No es retroactivo: debe activarse desde el alta en ARCA. No se puede aplicar a empleados ya registrados.</div>
+              </div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-num">03</div>
+              <div>
+                <div class="plan-item-title">Nuevos contratos con estructura optimizada</div>
+                <div class="plan-item-desc">Período de prueba máximo + componentes Art. 103 bis/104 bis (telefonía, internet, viáticos como no remunerativos) + banco de horas Art. 197 bis si aplica al CCT.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MEDIANO PLAZO -->
+        <div class="plan-section">
+          <div class="plan-header medium">
+            <div class="plan-header-top">
+              <span class="plan-header-icon">🟢</span>
+              <span class="plan-header-title">Mediano plazo</span>
+            </div>
+            <div class="plan-header-sub">Diciembre 2026 — al salir la reglamentación del FAL</div>
+          </div>
+          <div class="plan-body">
+            <div class="plan-item">
+              <div class="plan-num">01</div>
+              <div>
+                <div class="plan-item-title">Seleccionar entidad administradora del FAL</div>
+                <div class="plan-item-desc">Evaluá las entidades habilitadas por la CNV según rendimientos proyectados y solidez financiera. Cada empleador elige libremente entre las opciones disponibles.</div>
+              </div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-num">02</div>
+              <div>
+                <div class="plan-item-title">Decidir estrategia de cobertura de cese</div>
+                <div class="plan-item-desc">Opciones: solo FAL (1–2.5%) / seguro privado / FAL + seguro complementario / sistema de cese por CCT sectorial. Cada estrategia tiene implicancias distintas según tu plantel.</div>
+              </div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-num">03</div>
+              <div>
+                <div class="plan-item-title">Revisar el CCT de tu actividad</div>
+                <div class="plan-item-desc">Verificá si tu convenio introduce banco de horas anual, sistemas de cese sectorial u otras opciones específicas que puedan ser más favorables para tu empresa.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===== SECCIÓN 6: CONSULTOR IA ===== -->
+      <section id="s-consultor" class="section">
+        <div class="section-title">Consultor IA</div>
+        <div class="section-desc">Hacé tus consultas sobre la Ley 27.802. Respuestas claras y prácticas para tu empresa.</div>
+
+        <div class="chat-status">
+          <div class="chat-status-dot"></div>
+          ✓ Consultor listo — hacé tu primera pregunta sobre la Ley 27.802
+        </div>
+
+        <div class="suggested-pills" id="suggested-pills">
+          <button class="sug-pill" onclick="sendPreset(this, '¿Qué es el RIFL y cómo activo el beneficio?')">¿Qué es el RIFL y cómo activo el beneficio?</button>
+          <button class="sug-pill" onclick="sendPreset(this, '¿Qué documentos debo pedir mensualmente a mi empresa de limpieza?')">¿Qué documentos debo pedir mensualmente a mi empresa de limpieza?</button>
+          <button class="sug-pill" onclick="sendPreset(this, 'Tengo empleados en negro. ¿Qué conviene hacer?')">Tengo empleados en negro. ¿Qué conviene hacer?</button>
+          <button class="sug-pill" onclick="sendPreset(this, '¿El banco de horas puedo implementarlo con mi personal actual?')">¿El banco de horas puedo implementarlo con mi personal actual?</button>
+          <button class="sug-pill" onclick="sendPreset(this, '¿Qué pasa si un empleado me demanda bajo la nueva ley?')">¿Qué pasa si un empleado me demanda bajo la nueva ley?</button>
+        </div>
+
+        <div class="chat-area" id="chat-area"></div>
+
+        <div class="chat-input-row">
+          <input type="text" class="chat-input" id="chat-input" placeholder="Escribí tu pregunta..." onkeydown="onChatKey(event)">
+          <button class="send-btn" id="send-btn" onclick="sendChat()">Enviar</button>
+        </div>
+
+        <div class="chat-disclaimer">
+          Las respuestas tienen carácter informativo y no reemplazan el asesoramiento legal profesional individualizado.
+        </div>
+      </section>
+
+    </main>
+  </div><!-- /app-layout -->
+</div><!-- /app -->
+
+<script>
+// ===== NAVIGATION =====
+function showSection(id, btn) {
+  // Hide all sections
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+
+  // Sidebar buttons
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  // Mobile nav buttons
+  document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('active'));
+
+  if (btn) {
+    btn.classList.add('active');
+    // Also sync the other nav
+    const isMobile = btn.classList.contains('mnav-btn');
+    const otherSelector = isMobile ? '.nav-btn' : '.mnav-btn';
+    document.querySelectorAll(otherSelector).forEach(b => {
+      if (b.textContent.trim() === btn.textContent.trim() ||
+          (b.dataset && b.dataset.section === id)) {
+        b.classList.add('active');
+      }
+    });
+  }
+}
+
+// ===== SECTION 2: ACCORDION & FILTERS =====
+function toggleAccordion(header) {
+  const item = header.parentElement;
+  item.classList.toggle('open');
+}
+
+function filterAccordion(cat, btn) {
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.accordion-item').forEach(item => {
+    if (cat === 'todos' || item.dataset.cat === cat) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+// ===== SECTION 3: CALCULADORA RIFL =====
+let empCount = 3;
+
+function selectEmp(n, btn) {
+  empCount = n;
+  document.querySelectorAll('.emp-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  calcRIFL();
+}
+
+function formatMoney(n) {
+  n = Math.round(n);
+  if (n >= 1000000) {
+    const m = (n / 1000000);
+    return '$' + (Number.isInteger(m) ? m : m.toFixed(1)) + 'M';
+  }
+  if (n >= 1000) {
+    return '$' + Math.round(n / 1000) + 'k';
+  }
+  return '$' + n.toLocaleString('es-AR');
+}
+
+function calcRIFL() {
+  const sal = parseInt(document.getElementById('sal-slider').value);
+  document.getElementById('sal-display').textContent = formatMoney(sal).replace('k','000').replace('M','000000')
+    .replace(/\$(\d+)000$/,(m,g)=>'$'+parseInt(g).toLocaleString('es-AR')+'000')
+    || formatMoney(sal);
+  // Show raw for display
+  document.getElementById('sal-display').textContent = '$' + sal.toLocaleString('es-AR');
+
+  const gen    = sal * 0.20;
+  const rifl   = sal * 0.05;
+  const ahorro = gen - rifl;
+  const total  = ahorro * empCount;
+
+  document.getElementById('r-gen').textContent   = formatMoney(gen);
+  document.getElementById('r-rifl').textContent  = formatMoney(rifl);
+  document.getElementById('r-ahorro').textContent = formatMoney(ahorro);
+
+  const p12 = total * 12;
+  const p24 = total * 24;
+  const p48 = total * 48;
+
+  document.getElementById('p-12').textContent = formatMoney(p12);
+  document.getElementById('p-24').textContent = formatMoney(p24);
+  document.getElementById('p-48').textContent = formatMoney(p48);
+
+  document.getElementById('hero-total').textContent = formatMoney(p48);
+  document.getElementById('hero-sub').textContent   = 'para ' + empCount + ' empleado' + (empCount !== 1 ? 's' : '');
+}
+
+// Init calc on load
+calcRIFL();
+
+// ===== SECTION 4: BLINDAJE CHECKLIST =====
+function toggleCheck(el, mandatory) {
+  el.classList.toggle('done');
+  updateProgress();
+}
+
+function updateProgress() {
+  const mandatory = document.querySelectorAll('#checklist-mandatory .check-item');
+  let done = 0;
+  mandatory.forEach(item => { if (item.classList.contains('done')) done++; });
+  const total = mandatory.length; // 7
+  const pct = Math.round((done / total) * 100);
+
+  const pctEl   = document.getElementById('prog-pct');
+  const fillEl  = document.getElementById('prog-fill');
+  const countEl = document.getElementById('prog-count');
+  const succEl  = document.getElementById('prog-success');
+
+  pctEl.textContent   = pct + '%';
+  fillEl.style.width  = pct + '%';
+  countEl.textContent = done + ' de ' + total + ' ítems obligatorios';
+
+  // Color transitions
+  pctEl.className  = 'prog-pct';
+  fillEl.className = 'prog-fill';
+  if (pct >= 100) {
+    pctEl.classList.add('full');
+    fillEl.classList.add('full');
+    succEl.classList.add('visible');
+  } else if (pct >= 50) {
+    pctEl.classList.add('med');
+    fillEl.classList.add('med');
+    succEl.classList.remove('visible');
+  } else {
+    succEl.classList.remove('visible');
+  }
+}
+
+// ===== SECTION 6: CONSULTOR IA =====
+const WORKER_URL = 'https://ley-laboral-consultor.TU-SUBDOMINIO.workers.dev';
+
+const SYSTEM = `Sos un experto en derecho laboral argentino especializado en la Ley 27.802 de Modernización Laboral (publicada 06/03/2026). Tu audiencia son dueños y gerentes de PyMEs argentinas. Respondé de forma clara, práctica y directa usando el tuteo.
+
+INFORMACIÓN CLAVE:
+- DEROGADOS: Arts. 8-17 Ley 24.013, Art. 2 Ley 25.323, Art. 80 LCT (multa cert.), Art. 132 bis LCT
+- Período de prueba: 6 meses (extensible 8 o 12 por CCT). Sin preaviso.
+- Art. 245: única reparación por despido. Piso 67% (Vizzoti). Extingue reclamos civiles.
+- Art. 29: empleador = quien registra. Usuaria responde solo por período efectivo + repetición.
+- Art. 30: accesorias excluidas. Checklist documental exime totalmente.
+- Art. 31: solo fraude genera solidaridad en grupos económicos.
+- Art. 55: tasa pasiva BCRA + IPC + 3%. Aplica juicios en trámite. Hay planteos inconstitucionalidad.
+- Art. 20: pluspetición: costas solidarias trabajador + abogado.
+- Art. 103 bis: telefonía, internet, km, vivienda = NO REMUNERATIVOS.
+- Art. 104 bis: componentes variables sin ultraactividad.
+- RIFL: 5% contribuciones por 48 meses. Pendiente reglamentación (~mayo 2026).
+- PER: condonación 70-100%. 180 días desde reglamentación. Pendiente.
+- FAL: 1%/2.5%. Vigencia diferida 01/06/2026.
+- RIESGO RESIDUAL: daño generado (1716-1738 CCyCN) = 1 a 3x Art. 245. Solución: PER.
+Si algo está pendiente de reglamentación, decilo. No inventes información.`;
+
+let chatMsgs = [];
+let chatStarted = false;
+
+function hideSuggestions() {
+  if (!chatStarted) {
+    document.getElementById('suggested-pills').style.display = 'none';
+    chatStarted = true;
+  }
+}
+
+function addMessage(role, text) {
+  const area = document.getElementById('chat-area');
+  if (role === 'user') {
+    const el = document.createElement('div');
+    el.className = 'msg-u';
+    el.textContent = text;
+    area.appendChild(el);
+  } else {
+    const wrap = document.createElement('div');
+    wrap.className = 'msg-ai-wrap';
+    wrap.innerHTML = `<div class="msg-ai-avatar">◆</div><div class="msg-ai">${escapeHtml(text).replace(/\n/g, '<br>')}</div>`;
+    area.appendChild(wrap);
+  }
+  area.scrollTop = area.scrollHeight;
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showTyping() {
+  const area = document.getElementById('chat-area');
+  const wrap = document.createElement('div');
+  wrap.className = 'typing-wrap';
+  wrap.id = 'typing-indicator';
+  wrap.innerHTML = `<div class="msg-ai-avatar">◆</div><div class="typing-dots"><span></span><span></span><span></span></div>`;
+  area.appendChild(wrap);
+  area.scrollTop = area.scrollHeight;
+}
+
+function hideTyping() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.remove();
+}
+
+function setLoading(v) {
+  document.getElementById('send-btn').disabled = v;
+  document.getElementById('chat-input').disabled = v;
+}
+
+async function sendChat(presetText) {
+  const input = document.getElementById('chat-input');
+  const text  = (presetText || input.value).trim();
+  if (!text) return;
+
+  hideSuggestions();
+  addMessage('user', text);
+  chatMsgs.push({ role: 'user', content: text });
+  input.value = '';
+  setLoading(true);
+  showTyping();
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ system: SYSTEM, messages: chatMsgs }),
+    });
+    const data = await res.json();
+    hideTyping();
+
+    if (data.error) {
+      addMessage('assistant', '⚠ ' + data.error);
+    } else if (data.content && data.content[0] && data.content[0].text) {
+      const reply = data.content[0].text;
+      chatMsgs.push({ role: 'assistant', content: reply });
+      addMessage('assistant', reply);
+    } else {
+      addMessage('assistant', 'No se pudo obtener una respuesta. Revisá la configuración del Worker.');
+    }
+  } catch (err) {
+    hideTyping();
+    addMessage('assistant', '⚠ Error de conexión. Verificá que el Worker esté desplegado y que la URL sea correcta.');
+  }
+
+  setLoading(false);
+}
+
+function sendPreset(btn, text) {
+  sendChat(text);
+}
+
+function onChatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendChat();
+  }
+}
+
+// Initial welcome message
+(function() {
+  const area = document.getElementById('chat-area');
+  const wrap = document.createElement('div');
+  wrap.className = 'msg-ai-wrap';
+  wrap.innerHTML = `<div class="msg-ai-avatar">◆</div><div class="msg-ai">Hola. Soy tu consultor especializado en la Ley 27.802 de Modernización Laboral.<br><br>Podés preguntarme sobre los cambios en contratación, despidos, solidaridad laboral, el RIFL, el PER, o cualquier otro aspecto de la ley. ¿En qué te ayudo?</div>`;
+  area.appendChild(wrap);
+})();
+</script>
+
+</body>
+</html>

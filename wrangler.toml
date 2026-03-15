@@ -1,0 +1,9 @@
+name = "ley-laboral-consultor"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[[unsafe.bindings]]
+name = "RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 20, period = 600 }
