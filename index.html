@@ -1036,6 +1036,81 @@ input[type=range]::-moz-range-thumb {
   .landing-features { grid-template-columns: 1fr; }
 }
 
+/* ===== CALCULADORA LIQUIDACIÓN ===== */
+.calc-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 290px) minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+.input-panel {
+  background: var(--bg2);
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+.field { margin-bottom: 12px; }
+.field label { display: block; font-size: 11px; font-weight: 500; color: var(--text2); margin-bottom: 5px; }
+.field input[type=date],
+.field input[type=number] {
+  width: 100%;
+  padding: 7px 10px;
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius);
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  outline: none;
+}
+.field input[type=date]:focus,
+.field input[type=number]:focus { border-color: var(--border3); }
+.hint { font-size: 10.5px; color: var(--text3); margin-top: 3px; line-height: 1.4; }
+.ant-badge {
+  background: var(--info-bg); color: var(--info); border: 0.5px solid var(--info-border);
+  border-radius: var(--radius); padding: 7px 10px; font-size: 12px;
+  margin-bottom: 12px; line-height: 1.5; display: none;
+}
+.toggle-row { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 12px; cursor: pointer; user-select: none; }
+.tog { width: 34px; height: 19px; border-radius: 10px; flex-shrink: 0; margin-top: 2px; position: relative; transition: background 0.18s; }
+.tog-thumb { position: absolute; top: 3px; width: 13px; height: 13px; border-radius: 7px; background: var(--bg); transition: left 0.18s; }
+.tog-lbl { font-size: 12.5px; color: var(--text); }
+.tog-hint { font-size: 10.5px; color: var(--text3); margin-top: 2px; }
+.empty-state {
+  background: var(--bg2); border: 0.5px solid var(--border2); border-radius: var(--radius-lg);
+  padding: 40px 24px; text-align: center; color: var(--text3); font-size: 13px; line-height: 1.6;
+}
+.total-card { background: var(--text); color: var(--bg); border-radius: var(--radius-lg); padding: 16px 18px; margin-bottom: 10px; }
+.total-lbl { font-size: 10px; font-weight: 500; letter-spacing: 0.5px; opacity: 0.55; text-transform: uppercase; margin-bottom: 5px; }
+.total-num { font-size: 30px; font-weight: 500; font-family: var(--font-mono); line-height: 1; }
+.total-sub { font-size: 11px; opacity: 0.45; margin-top: 5px; }
+.results-card { background: var(--bg); border: 0.5px solid var(--border2); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 8px; }
+.sec-header { padding: 8px 14px; border-bottom: 0.5px solid var(--border); }
+.rubro-row { padding: 10px 14px; border-bottom: 0.5px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
+.rubro-row:last-child { border-bottom: none; }
+.rubro-row.zero-row { opacity: 0.45; }
+.rubro-row.derog-row { opacity: 0.4; }
+.rubro-name { font-size: 12.5px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.derog-row .rubro-name { text-decoration: line-through; color: var(--text2); }
+.rubro-art { font-size: 10.5px; color: var(--text3); font-family: var(--font-mono); }
+.rubro-formula { font-size: 11px; color: var(--text2); margin-top: 3px; line-height: 1.5; }
+.rubro-monto { font-size: 14px; font-weight: 500; font-family: var(--font-mono); color: var(--text); flex-shrink: 0; text-align: right; min-width: 100px; margin-top: 1px; }
+.derog-row .rubro-monto { text-decoration: line-through; color: var(--text3); }
+.subtotal-row { padding: 10px 14px; display: flex; justify-content: flex-end; background: var(--bg2); border-top: 0.5px solid var(--border); }
+.subtotal-v { font-size: 13px; font-weight: 500; font-family: var(--font-mono); }
+.nota-box { font-size: 11px; line-height: 1.5; padding: 7px 10px; border-radius: var(--radius); margin-top: 5px; }
+.nota-warn    { background: var(--warning-bg); color: var(--warning); border: 0.5px solid var(--warning-border); }
+.nota-info    { background: var(--info-bg);    color: var(--info);    border: 0.5px solid var(--info-border); }
+.nota-success { background: var(--success-bg); color: var(--success); border: 0.5px solid var(--success-border); }
+.derog-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; background: var(--bg2); border: 0.5px solid var(--border2);
+  border-radius: var(--radius-lg); cursor: pointer; font-size: 12px; font-weight: 500;
+  color: var(--text2); margin-bottom: 4px; user-select: none;
+}
+.derog-ico { font-size: 16px; color: var(--text3); font-family: var(--font-mono); line-height: 1; }
+.disc { font-size: 10.5px; color: var(--text3); text-align: center; margin-top: 12px; line-height: 1.6; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 700px) {
   #sidebar { display: none; }
@@ -1045,6 +1120,7 @@ input[type=range]::-moz-range-thumb {
   .grid-4 { grid-template-columns: 1fr 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
   .calc-layout { grid-template-columns: 1fr; }
+  .calc-grid { grid-template-columns: 1fr; }
   .compare-grid { grid-template-columns: 1fr; }
   .compare-rates { grid-template-columns: 1fr; }
   .proj-grid { grid-template-columns: 1fr; }
@@ -1540,123 +1616,79 @@ input[type=range]::-moz-range-thumb {
 
       <!-- ===== SECCIÓN: CALCULADORA INDEMNIZACIÓN ===== -->
       <section id="s-indemnizacion" class="section">
-        <div class="section-title">Calculadora de indemnización</div>
-        <div class="section-desc">Estimá el costo total de un despido sin causa bajo la Ley 27.802.</div>
+        <div class="section-title">Calculadora de liquidación final</div>
+        <div class="section-desc">Cálculo completo de todos los rubros de una liquidación por despido sin causa. Ley 20.744 + Ley 27.802 (vigente desde 06/03/2026).</div>
 
-        <div class="alert-box a-info" style="margin-bottom:20px">
-          <div class="alert-title">Art. 245 — nueva ley</div>
-          <div class="alert-text">La indemnización del Art. 245 es la <strong>única reparación procedente</strong> por despido sin causa. Ya no se puede acumular con acciones civiles ni con el Art. 2 de la Ley 25.323 (que antes duplicaba el monto). Codifica el piso Vizzoti: la indemnización no puede ser inferior al 67% de lo que correspondería sin tope salarial.</div>
-        </div>
+        <div class="calc-grid">
+          <!-- Panel izquierdo: inputs -->
+          <div class="input-panel">
+            <div class="sec-lbl">datos del empleado</div>
 
-        <div class="calc-layout">
-          <!-- Left: inputs -->
-          <div>
-            <div class="calc-input-group">
-              <label class="calc-label">Mejor remuneración normal y habitual</label>
-              <div class="calc-value" id="indem-sal-display">$500.000</div>
-              <input type="range" id="indem-sal-slider" min="200000" max="10000000" step="100000" value="500000" oninput="calcIndem()">
-              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px;font-family:var(--font-mono)">
-                <span>$200k</span><span>$10M</span>
+            <div class="field">
+              <label>Fecha de ingreso</label>
+              <input type="date" id="fi" oninput="calcLiquidacion()">
+            </div>
+
+            <div class="field">
+              <label>Fecha de despido</label>
+              <input type="date" id="fe" oninput="calcLiquidacion()">
+              <div class="hint">Fecha en que se comunica el despido (sin causa)</div>
+            </div>
+
+            <div class="ant-badge" id="ant-badge"></div>
+
+            <div class="field">
+              <label>Mejor remuneración mensual (base Art. 245)</label>
+              <input type="number" id="ms" placeholder="0" min="0" oninput="calcLiquidacion()">
+              <div class="hint">La más alta del último año. Excluye SAC y premios extraordinarios no mensuales (Ley 27.802).</div>
+            </div>
+
+            <div class="field">
+              <label>Salario actual mensual (si difiere de la anterior)</label>
+              <input type="number" id="sa" placeholder="Igual a la anterior" min="0" oninput="calcLiquidacion()">
+              <div class="hint">Se usa para calcular preaviso, SAC y vacaciones.</div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="toggle-row" onclick="toggleCampo('usaTope')">
+              <div class="tog" id="tog-usaTope" style="background:var(--border2)">
+                <div class="tog-thumb" style="left:3px"></div>
+              </div>
+              <div>
+                <div class="tog-lbl">Aplicar tope del CCT</div>
+                <div class="tog-hint">Activá si hay convenio colectivo de trabajo aplicable</div>
               </div>
             </div>
 
-            <div class="calc-input-group">
-              <label class="calc-label">Antigüedad</label>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-                <div>
-                  <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Años</div>
-                  <input type="number" id="indem-anios-input" min="0" max="40" value="2"
-                    oninput="calcIndem()"
-                    style="width:100%;padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:15px;font-family:var(--font-mono);font-weight:500;color:var(--text);background:var(--bg);outline:none">
-                </div>
-                <div>
-                  <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Meses adicionales</div>
-                  <input type="number" id="indem-meses-input" min="0" max="11" value="0"
-                    oninput="calcIndem()"
-                    style="width:100%;padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:15px;font-family:var(--font-mono);font-weight:500;color:var(--text);background:var(--bg);outline:none">
-                </div>
+            <div id="campo-tope" style="display:none">
+              <div class="field">
+                <label>Promedio salarial del CCT</label>
+                <input type="number" id="tope" placeholder="0" min="0" oninput="calcLiquidacion()">
+                <div class="hint">El tope legal = 3× este valor. La doctrina Vizzoti (codificada en Ley 27.802) garantiza que la base no baje del 67% del salario real.</div>
               </div>
             </div>
 
-            <div class="calc-input-group">
-              <label class="calc-label">Día del mes en que se notifica el despido</label>
-              <div class="calc-value" id="indem-dia-display">Día 15</div>
-              <input type="range" id="indem-dia-slider" min="1" max="30" step="1" value="15" oninput="calcIndem()">
-              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px;font-family:var(--font-mono)">
-                <span>Día 1</span><span>Día 30</span>
+            <div class="toggle-row" onclick="toggleCampo('dioPreaviso')">
+              <div class="tog" id="tog-dioPreaviso" style="background:var(--border2)">
+                <div class="tog-thumb" style="left:3px"></div>
+              </div>
+              <div>
+                <div class="tog-lbl">El empleado trabajó el preaviso</div>
+                <div class="tog-hint">Si se lo notificó y lo trabajó, no se abona sustitutivo</div>
               </div>
             </div>
 
-            <div class="calc-input-group">
-              <label class="calc-label">Situación registral</label>
-              <div class="cond-grid" style="grid-template-columns:1fr">
-                <div class="cond-item" id="cond-registrado" style="cursor:pointer;user-select:none" onclick="toggleRegistrado()">
-                  <span class="cond-dot" id="dot-registrado" style="background:var(--success)"></span>
-                  <span id="label-registrado">Trabajador correctamente registrado</span>
-                </div>
-              </div>
+            <div class="field">
+              <label>Días de vacaciones ya gozadas (año en curso)</label>
+              <input type="number" id="vg" value="0" min="0" oninput="calcLiquidacion()">
             </div>
           </div>
 
-          <!-- Right: results -->
-          <div>
-            <div class="hero-card" style="margin-bottom:12px">
-              <div class="hero-label">Total a pagar (estimado)</div>
-              <div class="hero-value" id="indem-total" style="color:var(--danger)">$1.500.000</div>
-              <div class="hero-sub" id="indem-total-sub">2 años · $500k salario</div>
-            </div>
-
-            <div class="card" style="margin-bottom:12px">
-              <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px">Desglose</div>
-              <div style="display:flex;flex-direction:column;gap:10px">
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                  <div>
-                    <div style="font-size:13px;font-weight:500">Indemnización Art. 245</div>
-                    <div style="font-size:11px;color:var(--text3)" id="indem-245-label">1 mes × 2 años</div>
-                  </div>
-                  <div style="font-family:var(--font-mono);font-size:14px;font-weight:500" id="indem-245-val">$1.000.000</div>
-                </div>
-                <div style="height:0.5px;background:var(--border)"></div>
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                  <div>
-                    <div style="font-size:13px;font-weight:500">Preaviso</div>
-                    <div style="font-size:11px;color:var(--text3)" id="indem-preaviso-label">1 mes</div>
-                  </div>
-                  <div style="font-family:var(--font-mono);font-size:14px;font-weight:500" id="indem-preaviso-val">$500.000</div>
-                </div>
-                <div style="height:0.5px;background:var(--border)"></div>
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                  <div>
-                    <div style="font-size:13px;font-weight:500">Integración del mes</div>
-                    <div style="font-size:11px;color:var(--text3)" id="indem-integ-label">15 días restantes</div>
-                  </div>
-                  <div style="font-family:var(--font-mono);font-size:14px;font-weight:500" id="indem-integ-val">$250.000</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="margin-bottom:12px">
-              <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px">Impacto de la nueva ley</div>
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                  <span style="font-size:13px;color:var(--text2)">Ley anterior (con Art. 2 Ley 25.323)</span>
-                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--danger)" id="indem-vieja">$2.500.000</span>
-                </div>
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                  <span style="font-size:13px;color:var(--text2)">Ley 27.802</span>
-                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--success)" id="indem-nueva">$1.500.000</span>
-                </div>
-                <div style="height:0.5px;background:var(--border)"></div>
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                  <span style="font-size:13px;font-weight:500">Ahorro para el empleador</span>
-                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--success)" id="indem-ahorro">$1.000.000</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="alert-box a-warn">
-              <div class="alert-title">Estimación orientativa</div>
-              <div class="alert-text" style="font-size:12px">No incluye SAC proporcional ni vacaciones no gozadas. La comparación con la ley anterior asume que el empleador fue demandado (Art. 2 Ley 25.323). Consultá con un abogado laboral para cifras exactas.</div>
+          <!-- Panel derecho: resultados -->
+          <div id="results">
+            <div class="empty-state">
+              Completá fecha de ingreso, fecha de despido y la mejor remuneración para ver el cálculo detallado.
             </div>
           </div>
         </div>
@@ -2161,79 +2193,232 @@ function onChatKey(e) {
   }
 }
 
-// ===== CALCULADORA INDEMNIZACIÓN =====
-let trabajadorRegistrado = true;
+// ===== CALCULADORA LIQUIDACIÓN FINAL =====
+const estadoLiq = { usaTope: false, dioPreaviso: false };
 
-function toggleRegistrado() {
-  trabajadorRegistrado = !trabajadorRegistrado;
-  document.getElementById('dot-registrado').style.background = trabajadorRegistrado ? 'var(--success)' : 'var(--danger)';
-  document.getElementById('label-registrado').textContent = trabajadorRegistrado
-    ? 'Trabajador correctamente registrado'
-    : 'Trabajador no registrado (en negro)';
-  calcIndem();
+function toggleCampo(clave) {
+  estadoLiq[clave] = !estadoLiq[clave];
+  const tog = document.getElementById('tog-' + clave);
+  const thumb = tog.querySelector('.tog-thumb');
+  tog.style.background = estadoLiq[clave] ? 'var(--text)' : 'var(--border2)';
+  thumb.style.left = estadoLiq[clave] ? '18px' : '3px';
+  if (clave === 'usaTope') {
+    document.getElementById('campo-tope').style.display = estadoLiq[clave] ? 'block' : 'none';
+  }
+  calcLiquidacion();
 }
 
-function calcIndem() {
-  const sal = parseInt(document.getElementById('indem-sal-slider').value);
-  const dia = parseInt(document.getElementById('indem-dia-slider').value);
-  const indemAnios  = Math.max(0, parseInt(document.getElementById('indem-anios-input').value)  || 0);
-  const indemMeses  = Math.max(0, Math.min(11, parseInt(document.getElementById('indem-meses-input').value) || 0));
+function fmtARS(n) {
+  n = Math.round(n);
+  if (!n || n < 0) return '$0';
+  return '$' + n.toLocaleString('es-AR');
+}
 
-  document.getElementById('indem-sal-display').textContent = '$' + sal.toLocaleString('es-AR');
-  document.getElementById('indem-dia-display').textContent = 'Día ' + dia;
+function difFechas(d1, d2) {
+  const s = new Date(d1 + 'T12:00:00');
+  const e = new Date(d2 + 'T12:00:00');
+  if (isNaN(s) || isNaN(e) || e <= s) return null;
+  let y = e.getFullYear() - s.getFullYear();
+  let m = e.getMonth() - s.getMonth();
+  let d = e.getDate() - s.getDate();
+  if (d < 0) { m--; d += new Date(e.getFullYear(), e.getMonth(), 0).getDate(); }
+  if (m < 0) { y--; m += 12; }
+  return { y, m, d, totalMeses: y * 12 + m, totalDias: Math.floor((e - s) / 86400000) };
+}
 
-  // Antigüedad: fracción > 3 meses cuenta como 1 año (Art. 245 LCT)
-  let unidades = indemAnios + (indemMeses > 3 ? 1 : 0);
-  if (unidades < 1) unidades = 1; // mínimo 1 período
+function vacDias(anios) {
+  if (anios < 5)  return 14;
+  if (anios < 10) return 21;
+  if (anios < 20) return 28;
+  return 35;
+}
 
-  // Art. 245
-  const indem245 = sal * unidades;
+function preavDias(totalMeses) {
+  if (totalMeses < 3)  return 15;
+  if (totalMeses < 60) return 30;
+  return 60;
+}
 
-  // Preaviso (Art. 231 LCT)
-  const totalMeses = indemAnios * 12 + indemMeses;
-  let preaviso, preavisoLabel;
-  if (totalMeses < 3) {
-    preaviso = Math.round(sal / 2);
-    preavisoLabel = '15 días (< 3 meses de antigüedad)';
-  } else if (indemAnios < 5) {
-    preaviso = sal;
-    preavisoLabel = '1 mes (hasta 5 años)';
+function rrubroRow(nombre, articulo, formula, monto, extraClass, nota) {
+  const esZero = monto === 0 && extraClass !== 'derog-row';
+  return `<div class="rubro-row ${extraClass || ''} ${esZero ? 'zero-row' : ''}">
+    <div style="flex:1;min-width:0">
+      <div class="rubro-name">${nombre}</div>
+      <div class="rubro-art">${articulo}</div>
+      ${formula ? `<div class="rubro-formula">${formula}</div>` : ''}
+      ${nota ? `<div class="nota-box nota-${nota.tipo}">${nota.msg}</div>` : ''}
+    </div>
+    <div class="rubro-monto">${extraClass === 'derog-row' ? '—' : fmtARS(monto)}</div>
+  </div>`;
+}
+
+function calcLiquidacion() {
+  const fi = document.getElementById('fi').value;
+  const fe = document.getElementById('fe').value;
+  const ms = parseFloat(document.getElementById('ms').value) || 0;
+  const saInput = parseFloat(document.getElementById('sa').value) || 0;
+  const sa = saInput > 0 ? saInput : ms;
+  const ant = difFechas(fi, fe);
+
+  const badge = document.getElementById('ant-badge');
+  if (ant) {
+    badge.style.display = 'block';
+    badge.innerHTML = `Antigüedad: <strong>${ant.y}a ${ant.m}m ${ant.d}d</strong> (${ant.totalMeses} meses · ${ant.totalDias} días)`;
   } else {
-    preaviso = sal * 2;
-    preavisoLabel = '2 meses (más de 5 años)';
+    badge.style.display = 'none';
   }
 
-  // Integración del mes (días restantes del mes / 30 × salario)
-  const diasRestantes = 30 - dia;
-  const integ = diasRestantes > 0 ? Math.round((diasRestantes / 30) * sal) : 0;
-  const integLabel = diasRestantes > 0 ? diasRestantes + ' días restantes del mes' : 'Despido el último día del mes';
-
-  const totalNueva = indem245 + preaviso + integ;
-
-  // Ley anterior: Art. 245 + Art. 2 Ley 25.323 (dobla la indemnización si fue a juicio)
-  // + Arts. 8-17 Ley 24.013 si era no registrado (aprox. 3x la indemnización adicional)
-  let totalVieja = indem245 * 2 + preaviso + integ; // Art. 2 dobla Art. 245
-  if (!trabajadorRegistrado) {
-    totalVieja += indem245 * 2; // Arts. 8-17 Ley 24.013 (simplificado)
+  if (!ant || ms <= 0) {
+    document.getElementById('results').innerHTML =
+      '<div class="empty-state">Completá fecha de ingreso, fecha de despido y la mejor remuneración para ver el cálculo detallado.</div>';
+    return;
   }
 
-  const ahorro = totalVieja - totalNueva;
-  const aniosLabel = unidades + ' año' + (unidades !== 1 ? 's' : '');
+  const { y, m, d, totalMeses } = ant;
+  const eDate = new Date(fe + 'T12:00:00');
+  const diaEgreso = eDate.getDate();
+  const diasEnMes = new Date(eDate.getFullYear(), eDate.getMonth() + 1, 0).getDate();
 
-  document.getElementById('indem-245-label').textContent = '$' + sal.toLocaleString('es-AR') + ' × ' + unidades + ' período' + (unidades !== 1 ? 's' : '');
-  document.getElementById('indem-245-val').textContent   = formatMoney(indem245);
-  document.getElementById('indem-preaviso-label').textContent = preavisoLabel;
-  document.getElementById('indem-preaviso-val').textContent   = formatMoney(preaviso);
-  document.getElementById('indem-integ-label').textContent    = integLabel;
-  document.getElementById('indem-integ-val').textContent      = formatMoney(integ);
-  document.getElementById('indem-total').textContent          = formatMoney(totalNueva);
-  document.getElementById('indem-total-sub').textContent      = aniosLabel + ' · $' + sal.toLocaleString('es-AR') + ' salario';
-  document.getElementById('indem-vieja').textContent  = formatMoney(totalVieja);
-  document.getElementById('indem-nueva').textContent  = formatMoney(totalNueva);
-  document.getElementById('indem-ahorro').textContent = formatMoney(ahorro);
+  // 1. Base Art. 245 con tope CCT y Vizzoti
+  let base245 = ms, topeNota = null;
+  if (estadoLiq.usaTope) {
+    const promCCT = parseFloat(document.getElementById('tope').value) || 0;
+    if (promCCT > 0) {
+      const topeTriple = promCCT * 3;
+      const pisoVizzoti = ms * 0.67;
+      if (topeTriple < ms) {
+        if (topeTriple < pisoVizzoti) {
+          base245 = pisoVizzoti;
+          topeNota = { tipo: 'warn', msg: `El tope CCT (${fmtARS(topeTriple)}) reduciría la base por debajo del 67% del salario real. Doctrina Vizzoti (Ley 27.802): se aplica el piso del 67% = ${fmtARS(pisoVizzoti)}.` };
+        } else {
+          base245 = topeTriple;
+          topeNota = { tipo: 'info', msg: `Tope CCT aplicado: ${fmtARS(topeTriple)} (3× promedio CCT). Representa más del 67% del salario real — dentro del límite Vizzoti.` };
+        }
+      }
+    }
+  }
+
+  // 2. Indemnización Art. 245
+  const mesCompletos = totalMeses;
+  const anosBase = Math.floor(mesCompletos / 12);
+  const restanMeses = mesCompletos % 12;
+  let anios245 = anosBase + (restanMeses > 3 ? 1 : 0);
+  if (anios245 === 0 && mesCompletos >= 3) anios245 = 1;
+  const superoPrueba = mesCompletos >= 3;
+  const ind245 = superoPrueba ? base245 * Math.max(anios245, 1) : 0;
+  const ind245Formula = superoPrueba
+    ? `${fmtARS(base245)} × ${Math.max(anios245,1)} año${Math.max(anios245,1) !== 1 ? 's' : ''}`
+    : 'Antigüedad menor a 3 meses — sin indemnización por antigüedad';
+
+  // 3. Preaviso sustitutivo
+  const pDias = preavDias(totalMeses);
+  const pMonto = estadoLiq.dioPreaviso ? 0 : (sa / 30) * pDias;
+  const pLabel = estadoLiq.dioPreaviso
+    ? 'Preaviso (trabajado — no se abona)'
+    : `Preaviso sustitutivo (${pDias === 15 ? '15 días' : pDias === 30 ? '1 mes' : '2 meses'})`;
+
+  // 4. Integración del mes
+  const diasInt = estadoLiq.dioPreaviso ? 0 : Math.max(0, diasEnMes - diaEgreso);
+  const intMonto = diasInt > 0 ? (sa / diasEnMes) * diasInt : 0;
+
+  // 5. Haberes del mes en curso
+  const habMonto = (sa / diasEnMes) * diaEgreso;
+
+  // 6. SAC proporcional del semestre (fórmula ARCA)
+  const mesE = eDate.getMonth();
+  const semStart = mesE < 6 ? new Date(eDate.getFullYear(), 0, 1) : new Date(eDate.getFullYear(), 6, 1);
+  const semEnd   = mesE < 6 ? new Date(eDate.getFullYear(), 5, 30) : new Date(eDate.getFullYear(), 11, 31);
+  const totalDiasSem = Math.floor((semEnd - semStart) / 86400000) + 1;
+  const diasEnSem = Math.min(Math.floor((eDate - semStart) / 86400000) + 1, totalDiasSem);
+  const sacProp = (sa / 2) * (diasEnSem / totalDiasSem);
+
+  // 7. SAC sobre preaviso e integración
+  const sacSobrePreaviso = estadoLiq.dioPreaviso ? 0 : pMonto / 12;
+  const sacSobreInt = intMonto > 0 ? intMonto / 12 : 0;
+
+  // 8. Vacaciones proporcionales (divisor 25, Art. 155 LCT)
+  const vacAnuales = vacDias(y);
+  const yearStart = new Date(eDate.getFullYear(), 0, 1);
+  const diasAnio = Math.floor((eDate - yearStart) / 86400000) + 1;
+  const vacDevengadas = Math.round((diasAnio / 365) * vacAnuales);
+  const vacGozadas = parseInt(document.getElementById('vg').value) || 0;
+  const vacProp = Math.max(0, vacDevengadas - vacGozadas);
+  const vacMonto = (sa / 25) * vacProp;
+
+  const total = ind245 + pMonto + intMonto + habMonto + sacProp + sacSobrePreaviso + sacSobreInt + vacMonto;
+
+  let html = `
+    <div class="total-card">
+      <div class="total-lbl">Total liquidación estimada</div>
+      <div class="total-num">${fmtARS(total)}</div>
+      <div class="total-sub">Valores brutos · antes de retenciones impositivas</div>
+    </div>
+    <div class="results-card">
+      <div class="sec-header" style="background:var(--danger-bg)">
+        <span style="font-size:10px;font-weight:500;color:var(--danger);letter-spacing:.4px;text-transform:uppercase">Indemnizaciones</span>
+      </div>
+      ${rrubroRow('Indemnización por antigüedad', 'Art. 245 LCT · Ley 27.802', ind245Formula, ind245, '', topeNota)}
+      ${rrubroRow(pLabel, 'Art. 232 LCT',
+        estadoLiq.dioPreaviso ? 'El empleado trabajó el período de preaviso completo'
+          : `${fmtARS(sa)} ÷ 30 × ${pDias} días`, pMonto)}
+      ${rrubroRow(
+        diasInt > 0 ? `Integración del mes de despido (${diasInt} días restantes)` : 'Integración del mes — no aplica',
+        'Art. 233 LCT',
+        estadoLiq.dioPreaviso ? 'No aplica cuando el empleado trabajó el preaviso'
+          : diasInt === 0 ? 'El despido ocurrió el último día del mes'
+          : `${fmtARS(sa)} ÷ ${diasEnMes} días × ${diasInt} días restantes`,
+        intMonto)}
+    </div>
+    <div class="results-card">
+      <div class="sec-header" style="background:var(--success-bg)">
+        <span style="font-size:10px;font-weight:500;color:var(--success);letter-spacing:.4px;text-transform:uppercase">Liquidación final</span>
+      </div>
+      ${rrubroRow(`Haberes del mes en curso (${diaEgreso} días trabajados)`, 'Art. 103 LCT',
+        `${fmtARS(sa)} ÷ ${diasEnMes} días × ${diaEgreso} días`, habMonto)}
+      ${rrubroRow('SAC proporcional del semestre', 'Art. 121/123 LCT · Fórmula ARCA',
+        `${fmtARS(sa)} ÷ 2 × (${diasEnSem} días ÷ ${totalDiasSem} días del semestre)`, sacProp)}
+      ${!estadoLiq.dioPreaviso && sacSobrePreaviso > 0 ? rrubroRow('SAC sobre preaviso sustitutivo', 'Art. 121 LCT + Art. 232 LCT',
+        `${fmtARS(pMonto)} ÷ 12`, sacSobrePreaviso) : ''}
+      ${sacSobreInt > 0 ? rrubroRow('SAC sobre integración del mes', 'Art. 121 LCT + Art. 233 LCT',
+        `${fmtARS(intMonto)} ÷ 12`, sacSobreInt) : ''}
+      ${rrubroRow(
+        vacProp > 0 ? `Vacaciones proporcionales no gozadas (${vacProp} días)` : 'Vacaciones proporcionales — ya gozadas',
+        'Art. 156 LCT · Divisor 25 (Art. 155 LCT)',
+        vacProp > 0 ? `${fmtARS(sa)} ÷ 25 × ${vacProp} días (de ${vacAnuales} anuales para ${y}a de antigüedad)`
+          : `Las ${vacAnuales} vacaciones anuales ya fueron gozadas`, vacMonto)}
+      <div class="subtotal-row"><span class="subtotal-v">Total: ${fmtARS(total)}</span></div>
+    </div>
+    <div class="derog-toggle" id="derog-btn" onclick="toggleDerogados()">
+      <span>Rubros derogados por Ley 27.802 (ya no aplican desde 06/03/2026)</span>
+      <span class="derog-ico" id="derog-ico">+</span>
+    </div>
+    <div id="derog-section" style="display:none">
+      <div style="padding:8px 12px;background:var(--danger-bg);border:0.5px solid var(--danger-border);border-radius:var(--radius);font-size:11.5px;color:var(--danger);line-height:1.6;margin-bottom:6px">
+        Estos rubros existían antes del 06/03/2026. Para despidos ocurridos a partir de esa fecha ya no son reclamables.
+        Subsiste el riesgo de reclamo por "daño generado" (arts. 1716–1738 CCyCN), estimado en 1–3× el Art. 245.
+      </div>
+      <div class="results-card">
+        ${rrubroRow('Multa por empleo no registrado', 'Arts. 8–17 Ley 24.013 — DEROGADO', '1/4 de las remuneraciones devengadas durante el período no registrado', 0, 'derog-row')}
+        ${rrubroRow('Duplicación de la indemnización', 'Art. 2 Ley 25.323 — DEROGADO', '2× indemnización Art. 245 en caso de no registración o deficiente registración', 0, 'derog-row')}
+        ${rrubroRow('Incremento del 50% por intimación', 'Art. 1 Ley 25.323 — DEROGADO', '+50% sobre Art. 245 si el trabajador intimó y el empleador no regularizó', 0, 'derog-row')}
+        ${rrubroRow('Multa por no entrega de certificados', 'Art. 80 LCT — DEROGADO', '3 remuneraciones por no entregar certificados en 30 días. Plazo ahora: 45 días hábiles.', 0, 'derog-row')}
+        ${rrubroRow('Sanción por retención de aportes', 'Art. 132 bis LCT — DEROGADO', '1 salario/mes hasta la regularización de los aportes retenidos', 0, 'derog-row')}
+      </div>
+    </div>
+    <div class="disc">Calculadora orientativa según LCT 20.744 y Ley 27.802 vigente desde el 06/03/2026. No reemplaza el asesoramiento legal profesional individualizado.</div>`;
+
+  document.getElementById('results').innerHTML = html;
 }
 
-calcIndem();
+function toggleDerogados() {
+  const sec = document.getElementById('derog-section');
+  const ico = document.getElementById('derog-ico');
+  if (sec) {
+    const visible = sec.style.display !== 'none';
+    sec.style.display = visible ? 'none' : 'block';
+    if (ico) ico.textContent = visible ? '+' : '−';
+  }
+}
 
 // Initial welcome message
 (function() {
