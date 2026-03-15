@@ -1075,9 +1075,9 @@ input[type=range]::-moz-range-thumb {
         <div class="landing-feature-desc">12 cambios clave explicados en formato antes/después</div>
       </div>
       <div class="landing-feature">
-        <div class="landing-feature-icon">📊</div>
-        <div class="landing-feature-title">Calculadora RIFL</div>
-        <div class="landing-feature-desc">Proyectá tu ahorro real en contribuciones patronales</div>
+        <div class="landing-feature-icon">💼</div>
+        <div class="landing-feature-title">Calculadora de despido</div>
+        <div class="landing-feature-desc">Estimá el costo real de un despido sin causa: Art. 245, preaviso e integración del mes</div>
       </div>
       <div class="landing-feature">
         <div class="landing-feature-icon">🛡️</div>
@@ -1989,16 +1989,7 @@ function filterAccordion(cat, btn) {
   });
 }
 
-// ===== SECTION 3: CALCULADORA RIFL =====
-let empCount = 3;
-
-function selectEmp(n, btn) {
-  empCount = n;
-  document.querySelectorAll('.emp-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  calcRIFL();
-}
-
+// ===== HELPERS =====
 function formatMoney(n) {
   n = Math.round(n);
   if (n >= 1000000) {
@@ -2010,38 +2001,6 @@ function formatMoney(n) {
   }
   return '$' + n.toLocaleString('es-AR');
 }
-
-function calcRIFL() {
-  const sal = parseInt(document.getElementById('sal-slider').value);
-  document.getElementById('sal-display').textContent = formatMoney(sal).replace('k','000').replace('M','000000')
-    .replace(/\$(\d+)000$/,(m,g)=>'$'+parseInt(g).toLocaleString('es-AR')+'000')
-    || formatMoney(sal);
-  // Show raw for display
-  document.getElementById('sal-display').textContent = '$' + sal.toLocaleString('es-AR');
-
-  const gen    = sal * 0.20;
-  const rifl   = sal * 0.05;
-  const ahorro = gen - rifl;
-  const total  = ahorro * empCount;
-
-  document.getElementById('r-gen').textContent   = formatMoney(gen);
-  document.getElementById('r-rifl').textContent  = formatMoney(rifl);
-  document.getElementById('r-ahorro').textContent = formatMoney(ahorro);
-
-  const p12 = total * 12;
-  const p24 = total * 24;
-  const p48 = total * 48;
-
-  document.getElementById('p-12').textContent = formatMoney(p12);
-  document.getElementById('p-24').textContent = formatMoney(p24);
-  document.getElementById('p-48').textContent = formatMoney(p48);
-
-  document.getElementById('hero-total').textContent = formatMoney(p48);
-  document.getElementById('hero-sub').textContent   = 'para ' + empCount + ' empleado' + (empCount !== 1 ? 's' : '');
-}
-
-// Init calc on load
-calcRIFL();
 
 // ===== SECTION 4: BLINDAJE CHECKLIST =====
 function toggleCheck(el, mandatory) {
