@@ -1124,11 +1124,10 @@ input[type=range]::-moz-range-thumb {
     <div class="mobile-nav-inner">
       <button class="mnav-btn active" onclick="showSection('inicio', this)">Inicio</button>
       <button class="mnav-btn" onclick="showSection('comparativa', this)">Comparativa</button>
-      <button class="mnav-btn" onclick="showSection('calculadora', this)">Calculadora RIFL</button>
       <button class="mnav-btn" onclick="showSection('indemnizacion', this)">Calculadora despido</button>
       <button class="mnav-btn" onclick="showSection('blindaje', this)">Protección laboral</button>
-      <button class="mnav-btn" onclick="showSection('plan', this)">Plan de acción</button>
       <button class="mnav-btn" onclick="showSection('consultor', this)">Consultor IA</button>
+      <button class="mnav-btn" onclick="showSection('plan', this)">Plan de acción</button>
     </div>
   </nav>
 
@@ -1143,20 +1142,17 @@ input[type=range]::-moz-range-thumb {
       <button class="nav-btn" onclick="showSection('comparativa', this)" data-section="comparativa">
         <span class="nav-icon">⚖️</span> Comparativa
       </button>
-      <button class="nav-btn" onclick="showSection('calculadora', this)" data-section="calculadora">
-        <span class="nav-icon">📊</span> Calculadora RIFL
-      </button>
       <button class="nav-btn" onclick="showSection('indemnizacion', this)" data-section="indemnizacion">
         <span class="nav-icon">💼</span> Calculadora despido
       </button>
       <button class="nav-btn" onclick="showSection('blindaje', this)" data-section="blindaje">
         <span class="nav-icon">🛡️</span> Protección laboral
       </button>
-      <button class="nav-sub-btn" onclick="showSection('plan', this)" data-section="plan" style="margin-top:2px">
-        <span class="nav-icon" style="font-size:12px">📋</span> Plan de acción
-      </button>
       <button class="nav-btn" onclick="showSection('consultor', this)" data-section="consultor">
         <span class="nav-icon">💬</span> Consultor IA
+      </button>
+      <button class="nav-btn" onclick="showSection('plan', this)" data-section="plan">
+        <span class="nav-icon">📋</span> Plan de acción
       </button>
       <div class="sidebar-footer">
         Basado en análisis jurídico especializado · Ley 27.802 · Corte: 13/03/2026
@@ -1217,10 +1213,10 @@ input[type=range]::-moz-range-thumb {
             <span class="quick-btn-label">Ley vieja vs nueva</span>
             <span class="quick-btn-desc">12 cambios con antes/después</span>
           </button>
-          <button class="quick-btn" onclick="showSection('calculadora')">
-            <span class="quick-btn-icon">📊</span>
-            <span class="quick-btn-label">Calculadora RIFL</span>
-            <span class="quick-btn-desc">Proyectá tu ahorro en contribuciones</span>
+          <button class="quick-btn" onclick="showSection('indemnizacion')">
+            <span class="quick-btn-icon">💼</span>
+            <span class="quick-btn-label">Calculadora despido</span>
+            <span class="quick-btn-desc">Estimá el costo de un despido sin causa</span>
           </button>
           <button class="quick-btn" onclick="showSection('blindaje')">
             <span class="quick-btn-icon">🛡️</span>
@@ -1540,102 +1536,6 @@ input[type=range]::-moz-range-thumb {
           </div>
 
         </div><!-- /accordion-list -->
-      </section>
-
-      <!-- ===== SECCIÓN 3: CALCULADORA RIFL ===== -->
-      <section id="s-calculadora" class="section">
-        <div class="section-title">Calculadora RIFL</div>
-        <div class="section-desc">Proyectá tu ahorro en contribuciones patronales con el nuevo régimen de incentivo a la formalización laboral.</div>
-
-        <div class="rifl-intro">
-          <div class="rifl-intro-title">¿Qué es el RIFL?</div>
-          <div class="rifl-intro-text">
-            El <strong>Régimen de Incentivo a la Formalización Laboral (RIFL)</strong> es uno de los cambios más importantes de la Ley 27.802. Permite registrar nuevos empleados pagando solo el <strong>5% de contribuciones patronales</strong> durante 48 meses, en lugar del 17–23% del régimen general.<br><br>
-            Es aplicable a trabajadores que no tenían relación laboral registrada al 10/12/2025, estuvieron desempleados los 6 meses previos, estaban inscriptos como monotributistas, o venían del sector público. <strong>Pendiente de reglamentación: estimado mayo 2026.</strong>
-          </div>
-        </div>
-
-        <div class="calc-layout">
-          <!-- Left: inputs -->
-          <div>
-            <div class="calc-input-group">
-              <label class="calc-label">Salario bruto mensual</label>
-              <div class="calc-value" id="sal-display">$500.000</div>
-              <input type="range" id="sal-slider" min="200000" max="2000000" step="50000" value="500000" oninput="calcRIFL()">
-              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px;font-family:var(--font-mono)">
-                <span>$200k</span><span>$2M</span>
-              </div>
-            </div>
-
-            <div class="calc-input-group">
-              <label class="calc-label">Cantidad de empleados RIFL</label>
-              <div class="emp-btns" id="emp-btns">
-                <button class="emp-btn" onclick="selectEmp(1,this)">1</button>
-                <button class="emp-btn active" onclick="selectEmp(3,this)">3</button>
-                <button class="emp-btn" onclick="selectEmp(5,this)">5</button>
-                <button class="emp-btn" onclick="selectEmp(10,this)">10</button>
-                <button class="emp-btn" onclick="selectEmp(20,this)">20</button>
-              </div>
-            </div>
-
-            <div class="calc-input-group">
-              <label class="calc-label">Condiciones del trabajador (RIFL)</label>
-              <div class="cond-grid">
-                <div class="cond-item"><span class="cond-dot"></span>Sin relación laboral registrada al 10/12/2025</div>
-                <div class="cond-item"><span class="cond-dot"></span>Desempleado los 6 meses previos al alta</div>
-                <div class="cond-item"><span class="cond-dot"></span>Inscripto como monotributista</div>
-                <div class="cond-item"><span class="cond-dot"></span>Último empleo en el sector público</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: results -->
-          <div>
-            <div class="hero-card">
-              <div class="hero-label">Ahorro total en 48 meses</div>
-              <div class="hero-value" id="hero-total">$691k</div>
-              <div class="hero-sub" id="hero-sub">para 3 empleados</div>
-            </div>
-
-            <div class="compare-rates" style="margin-bottom:12px">
-              <div class="rate-item gen">
-                <div class="rate-value" id="r-gen">$100k</div>
-                <div class="rate-label">Régimen general/mes</div>
-              </div>
-              <div class="rate-item rifl">
-                <div class="rate-value" id="r-rifl">$25k</div>
-                <div class="rate-label">RIFL/mes</div>
-              </div>
-              <div class="rate-item ahorro">
-                <div class="rate-value" id="r-ahorro">$75k</div>
-                <div class="rate-label">Ahorro/mes</div>
-              </div>
-            </div>
-
-            <div class="card" style="margin-bottom:12px">
-              <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px">Proyección total</div>
-              <div class="proj-grid">
-                <div class="proj-item">
-                  <div class="proj-value" id="p-12">$180k</div>
-                  <div class="proj-label">Anual</div>
-                </div>
-                <div class="proj-item">
-                  <div class="proj-value" id="p-24">$360k</div>
-                  <div class="proj-label">2 años</div>
-                </div>
-                <div class="proj-item">
-                  <div class="proj-value" id="p-48">$720k</div>
-                  <div class="proj-label">48 meses</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="alert-box a-warn">
-              <div class="alert-title">⏳ Pendiente de reglamentación</div>
-              <div class="alert-text" style="font-size:12px">El RIFL aún no tiene fecha de entrada en vigor. Se estima su reglamentación para mayo 2026. Los valores son proyecciones basadas en el texto de la ley.</div>
-            </div>
-          </div>
-        </div>
       </section>
 
       <!-- ===== SECCIÓN: CALCULADORA INDEMNIZACIÓN ===== -->
