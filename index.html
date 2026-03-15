@@ -1125,6 +1125,7 @@ input[type=range]::-moz-range-thumb {
       <button class="mnav-btn active" onclick="showSection('inicio', this)">Inicio</button>
       <button class="mnav-btn" onclick="showSection('comparativa', this)">Comparativa</button>
       <button class="mnav-btn" onclick="showSection('calculadora', this)">Calculadora RIFL</button>
+      <button class="mnav-btn" onclick="showSection('indemnizacion', this)">Calculadora despido</button>
       <button class="mnav-btn" onclick="showSection('blindaje', this)">Protección laboral</button>
       <button class="mnav-btn" onclick="showSection('plan', this)">Plan de acción</button>
       <button class="mnav-btn" onclick="showSection('consultor', this)">Consultor IA</button>
@@ -1144,6 +1145,9 @@ input[type=range]::-moz-range-thumb {
       </button>
       <button class="nav-btn" onclick="showSection('calculadora', this)" data-section="calculadora">
         <span class="nav-icon">📊</span> Calculadora RIFL
+      </button>
+      <button class="nav-btn" onclick="showSection('indemnizacion', this)" data-section="indemnizacion">
+        <span class="nav-icon">💼</span> Calculadora despido
       </button>
       <button class="nav-btn" onclick="showSection('blindaje', this)" data-section="blindaje">
         <span class="nav-icon">🛡️</span> Protección laboral
@@ -1629,6 +1633,137 @@ input[type=range]::-moz-range-thumb {
             <div class="alert-box a-warn">
               <div class="alert-title">⏳ Pendiente de reglamentación</div>
               <div class="alert-text" style="font-size:12px">El RIFL aún no tiene fecha de entrada en vigor. Se estima su reglamentación para mayo 2026. Los valores son proyecciones basadas en el texto de la ley.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SECCIÓN: CALCULADORA INDEMNIZACIÓN ===== -->
+      <section id="s-indemnizacion" class="section">
+        <div class="section-title">Calculadora de indemnización</div>
+        <div class="section-desc">Estimá el costo total de un despido sin causa bajo la Ley 27.802.</div>
+
+        <div class="alert-box a-info" style="margin-bottom:20px">
+          <div class="alert-title">Art. 245 — nueva ley</div>
+          <div class="alert-text">La indemnización del Art. 245 es la <strong>única reparación procedente</strong> por despido sin causa. Ya no se puede acumular con acciones civiles ni con el Art. 2 de la Ley 25.323 (que antes duplicaba el monto). Codifica el piso Vizzoti: la indemnización no puede ser inferior al 67% de lo que correspondería sin tope salarial.</div>
+        </div>
+
+        <div class="calc-layout">
+          <!-- Left: inputs -->
+          <div>
+            <div class="calc-input-group">
+              <label class="calc-label">Mejor remuneración normal y habitual</label>
+              <div class="calc-value" id="indem-sal-display">$500.000</div>
+              <input type="range" id="indem-sal-slider" min="200000" max="2000000" step="50000" value="500000" oninput="calcIndem()">
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px;font-family:var(--font-mono)">
+                <span>$200k</span><span>$2M</span>
+              </div>
+            </div>
+
+            <div class="calc-input-group">
+              <label class="calc-label">Antigüedad</label>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div>
+                  <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Años</div>
+                  <div class="emp-btns" id="indem-anios-btns">
+                    <button class="emp-btn" onclick="selectAnios(0,this)">0</button>
+                    <button class="emp-btn active" onclick="selectAnios(2,this)">2</button>
+                    <button class="emp-btn" onclick="selectAnios(5,this)">5</button>
+                    <button class="emp-btn" onclick="selectAnios(10,this)">10</button>
+                    <button class="emp-btn" onclick="selectAnios(20,this)">20</button>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Meses adicionales</div>
+                  <div class="emp-btns" id="indem-meses-btns">
+                    <button class="emp-btn active" onclick="selectMeses(0,this)">0</button>
+                    <button class="emp-btn" onclick="selectMeses(3,this)">3</button>
+                    <button class="emp-btn" onclick="selectMeses(6,this)">6</button>
+                    <button class="emp-btn" onclick="selectMeses(9,this)">9</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-input-group">
+              <label class="calc-label">Día del mes en que se notifica el despido</label>
+              <div class="calc-value" id="indem-dia-display">Día 15</div>
+              <input type="range" id="indem-dia-slider" min="1" max="30" step="1" value="15" oninput="calcIndem()">
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px;font-family:var(--font-mono)">
+                <span>Día 1</span><span>Día 30</span>
+              </div>
+            </div>
+
+            <div class="calc-input-group">
+              <label class="calc-label">Situación registral</label>
+              <div class="cond-grid" style="grid-template-columns:1fr">
+                <div class="cond-item" id="cond-registrado" style="cursor:pointer;user-select:none" onclick="toggleRegistrado()">
+                  <span class="cond-dot" id="dot-registrado" style="background:var(--success)"></span>
+                  <span id="label-registrado">Trabajador correctamente registrado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: results -->
+          <div>
+            <div class="hero-card" style="margin-bottom:12px">
+              <div class="hero-label">Total a pagar (estimado)</div>
+              <div class="hero-value" id="indem-total" style="color:var(--danger)">$1.500.000</div>
+              <div class="hero-sub" id="indem-total-sub">2 años · $500k salario</div>
+            </div>
+
+            <div class="card" style="margin-bottom:12px">
+              <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px">Desglose</div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-size:13px;font-weight:500">Indemnización Art. 245</div>
+                    <div style="font-size:11px;color:var(--text3)" id="indem-245-label">1 mes × 2 años</div>
+                  </div>
+                  <div style="font-family:var(--font-mono);font-size:14px;font-weight:500" id="indem-245-val">$1.000.000</div>
+                </div>
+                <div style="height:0.5px;background:var(--border)"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-size:13px;font-weight:500">Preaviso</div>
+                    <div style="font-size:11px;color:var(--text3)" id="indem-preaviso-label">1 mes</div>
+                  </div>
+                  <div style="font-family:var(--font-mono);font-size:14px;font-weight:500" id="indem-preaviso-val">$500.000</div>
+                </div>
+                <div style="height:0.5px;background:var(--border)"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-size:13px;font-weight:500">Integración del mes</div>
+                    <div style="font-size:11px;color:var(--text3)" id="indem-integ-label">15 días restantes</div>
+                  </div>
+                  <div style="font-family:var(--font-mono);font-size:14px;font-weight:500" id="indem-integ-val">$250.000</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom:12px">
+              <div style="font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px">Impacto de la nueva ley</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <span style="font-size:13px;color:var(--text2)">Ley anterior (con Art. 2 Ley 25.323)</span>
+                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--danger)" id="indem-vieja">$2.500.000</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <span style="font-size:13px;color:var(--text2)">Ley 27.802</span>
+                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--success)" id="indem-nueva">$1.500.000</span>
+                </div>
+                <div style="height:0.5px;background:var(--border)"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <span style="font-size:13px;font-weight:500">Ahorro para el empleador</span>
+                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--success)" id="indem-ahorro">$1.000.000</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="alert-box a-warn">
+              <div class="alert-title">Estimación orientativa</div>
+              <div class="alert-text" style="font-size:12px">No incluye SAC proporcional ni vacaciones no gozadas. La comparación con la ley anterior asume que el empleador fue demandado (Art. 2 Ley 25.323). Consultá con un abogado laboral para cifras exactas.</div>
             </div>
           </div>
         </div>
@@ -2173,6 +2308,94 @@ function onChatKey(e) {
     sendChat();
   }
 }
+
+// ===== CALCULADORA INDEMNIZACIÓN =====
+let indemAnios = 2;
+let indemMeses = 0;
+let trabajadorRegistrado = true;
+
+function selectAnios(n, btn) {
+  indemAnios = n;
+  document.querySelectorAll('#indem-anios-btns .emp-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  calcIndem();
+}
+
+function selectMeses(n, btn) {
+  indemMeses = n;
+  document.querySelectorAll('#indem-meses-btns .emp-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  calcIndem();
+}
+
+function toggleRegistrado() {
+  trabajadorRegistrado = !trabajadorRegistrado;
+  document.getElementById('dot-registrado').style.background = trabajadorRegistrado ? 'var(--success)' : 'var(--danger)';
+  document.getElementById('label-registrado').textContent = trabajadorRegistrado
+    ? 'Trabajador correctamente registrado'
+    : 'Trabajador no registrado (en negro)';
+  calcIndem();
+}
+
+function calcIndem() {
+  const sal = parseInt(document.getElementById('indem-sal-slider').value);
+  const dia = parseInt(document.getElementById('indem-dia-slider').value);
+
+  document.getElementById('indem-sal-display').textContent = '$' + sal.toLocaleString('es-AR');
+  document.getElementById('indem-dia-display').textContent = 'Día ' + dia;
+
+  // Antigüedad: fracción > 3 meses cuenta como 1 año (Art. 245 LCT)
+  let unidades = indemAnios + (indemMeses > 3 ? 1 : 0);
+  if (unidades < 1) unidades = 1; // mínimo 1 período
+
+  // Art. 245
+  const indem245 = sal * unidades;
+
+  // Preaviso (Art. 231 LCT)
+  const totalMeses = indemAnios * 12 + indemMeses;
+  let preaviso, preavisoLabel;
+  if (totalMeses < 3) {
+    preaviso = Math.round(sal / 2);
+    preavisoLabel = '15 días (< 3 meses de antigüedad)';
+  } else if (indemAnios < 5) {
+    preaviso = sal;
+    preavisoLabel = '1 mes (hasta 5 años)';
+  } else {
+    preaviso = sal * 2;
+    preavisoLabel = '2 meses (más de 5 años)';
+  }
+
+  // Integración del mes (días restantes del mes / 30 × salario)
+  const diasRestantes = 30 - dia;
+  const integ = diasRestantes > 0 ? Math.round((diasRestantes / 30) * sal) : 0;
+  const integLabel = diasRestantes > 0 ? diasRestantes + ' días restantes del mes' : 'Despido el último día del mes';
+
+  const totalNueva = indem245 + preaviso + integ;
+
+  // Ley anterior: Art. 245 + Art. 2 Ley 25.323 (dobla la indemnización si fue a juicio)
+  // + Arts. 8-17 Ley 24.013 si era no registrado (aprox. 3x la indemnización adicional)
+  let totalVieja = indem245 * 2 + preaviso + integ; // Art. 2 dobla Art. 245
+  if (!trabajadorRegistrado) {
+    totalVieja += indem245 * 2; // Arts. 8-17 Ley 24.013 (simplificado)
+  }
+
+  const ahorro = totalVieja - totalNueva;
+  const aniosLabel = unidades + ' año' + (unidades !== 1 ? 's' : '');
+
+  document.getElementById('indem-245-label').textContent = '$' + sal.toLocaleString('es-AR') + ' × ' + unidades + ' período' + (unidades !== 1 ? 's' : '');
+  document.getElementById('indem-245-val').textContent   = formatMoney(indem245);
+  document.getElementById('indem-preaviso-label').textContent = preavisoLabel;
+  document.getElementById('indem-preaviso-val').textContent   = formatMoney(preaviso);
+  document.getElementById('indem-integ-label').textContent    = integLabel;
+  document.getElementById('indem-integ-val').textContent      = formatMoney(integ);
+  document.getElementById('indem-total').textContent          = formatMoney(totalNueva);
+  document.getElementById('indem-total-sub').textContent      = aniosLabel + ' · $' + sal.toLocaleString('es-AR') + ' salario';
+  document.getElementById('indem-vieja').textContent  = formatMoney(totalVieja);
+  document.getElementById('indem-nueva').textContent  = formatMoney(totalNueva);
+  document.getElementById('indem-ahorro').textContent = formatMoney(ahorro);
+}
+
+calcIndem();
 
 // Initial welcome message
 (function() {
