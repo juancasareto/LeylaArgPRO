@@ -2288,7 +2288,8 @@ async function sendChat(presetText) {
     hideTyping();
 
     if (data.error) {
-      addMessage('assistant', '⚠ ' + data.error);
+      const msg = typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error));
+      addMessage('assistant', '⚠ ' + msg);
     } else if (data.content && data.content[0] && data.content[0].text) {
       const reply = data.content[0].text;
       chatMsgs.push({ role: 'assistant', content: reply });
