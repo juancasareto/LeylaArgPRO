@@ -2236,7 +2236,7 @@ function addMessage(role, text) {
   } else {
     const wrap = document.createElement('div');
     wrap.className = 'msg-ai-wrap';
-    wrap.innerHTML = `<div class="msg-ai-avatar">◆</div><div class="msg-ai">${escapeHtml(text).replace(/\n/g, '<br>')}</div>`;
+    wrap.innerHTML = `<div class="msg-ai-avatar">◆</div><div class="msg-ai">${renderMarkdown(text)}</div>`;
     area.appendChild(wrap);
   }
   area.scrollTop = area.scrollHeight;
@@ -2244,6 +2244,38 @@ function addMessage(role, text) {
 
 function escapeHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Renderizador de markdown mínimo (headers, negrita, itálica, listas) sin dependencias.
+function inlineMd(s) {
+  return s
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|\s)\*(?!\*)(.+?)\*(?!\*)/g, '$1<em>$2</em>');
+}
+
+function renderMarkdown(text) {
+  const lines = escapeHtml(text).split('\n');
+  let html = '';
+  let inList = false;
+  for (const line of lines) {
+    const headingMatch = line.match(/^(#{1,4})\s+(.*)$/);
+    const listMatch = line.match(/^[-*]\s+(.*)$/);
+    if (listMatch) {
+      if (!inList) { html += '<ul style="margin:4px 0 8px 20px;padding:0;">'; inList = true; }
+      html += `<li style="margin:2px 0;">${inlineMd(listMatch[1])}</li>`;
+      continue;
+    }
+    if (inList) { html += '</ul>'; inList = false; }
+    if (headingMatch) {
+      html += `<div style="font-weight:700;margin:10px 0 4px;">${inlineMd(headingMatch[2])}</div>`;
+    } else if (line.trim() === '') {
+      html += '<br>';
+    } else {
+      html += `<div>${inlineMd(line)}</div>`;
+    }
+  }
+  if (inList) html += '</ul>';
+  return html;
 }
 
 function showTyping() {
