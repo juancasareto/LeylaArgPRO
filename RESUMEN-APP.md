@@ -31,7 +31,7 @@ Aplicación web orientada a dueños y gerentes de PyMEs argentinas para entender
 ### IA
 | Tecnología | Uso |
 |---|---|
-| **Anthropic Claude API** | Modelo `claude-sonnet-4-20250514` · `max_tokens: 1000` · sistema prompt especializado en Ley 27.802 |
+| **Anthropic Claude API** | Modelo `claude-haiku-4-5-20251001` · `max_tokens: 1000` · sistema prompt especializado en Ley 27.802 |
 
 ---
 
@@ -46,7 +46,7 @@ Cloudflare Worker                ← API key vive aquí como Secret
     │
     │  POST + x-api-key header
     ▼
-Anthropic API (claude-sonnet-4)
+Anthropic API (claude-haiku-4-5)
 ```
 
 El Worker aplica **rate limiting por IP**: 20 requests cada 10 minutos (binding `RATE_LIMITER` en Cloudflare).
@@ -117,13 +117,13 @@ Hoja de ruta en 3 etapas: Inmediato / Q2 2026 / Diciembre 2026.
 | **GitHub** | Free | $0/mes | Repositorio del código + hosting vía GitHub Pages |
 | **GitHub Pages** | Free (incluido en GitHub) | $0/mes | Hosting del `index.html` con HTTPS automático |
 | **Cloudflare Workers** | Free tier | $0/mes | Hasta 100.000 requests/día incluidos. Proxy de API. |
-| **Anthropic Claude API** | Pay-as-you-go | ~$5–15/mes (uso normal PyME) | `claude-sonnet-4-20250514` · $3/M tokens input · $15/M tokens output |
+| **Anthropic Claude API** | Pay-as-you-go | ~$1–3/mes (uso normal PyME) | `claude-haiku-4-5-20251001` · $1/M tokens input · $5/M tokens output |
 
 **Costo total estimado: $0/mes en infraestructura + uso real de la API de Anthropic.**
 
 ### Detalle de costos API (referencia)
-- Consulta promedio: ~500 tokens de input + ~400 tokens de output ≈ $0.0075 por consulta
-- 100 consultas/mes ≈ $0.75 · 500 consultas/mes ≈ $3.75 · 1.000 consultas/mes ≈ $7.50
+- Consulta promedio: ~500 tokens de input + ~400 tokens de output ≈ $0.0025 por consulta
+- 100 consultas/mes ≈ $0.25 · 500 consultas/mes ≈ $1.25 · 1.000 consultas/mes ≈ $2.50
 
 ---
 

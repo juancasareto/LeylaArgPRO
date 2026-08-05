@@ -1,5 +1,7 @@
 # Ley Laboral Argentina — Consultor IA PRO
 
+**Demo online**: https://juancasareto.github.io/LeylaArgPRO/
+
 Plataforma web interactiva sobre la **Ley 27.802 de Modernización Laboral** (publicada el 06/03/2026), orientada a dueños y gerentes de PyMEs argentinas. Permite consultar los cambios clave, calcular ahorros con el RIFL, gestionar el blindaje legal del Art. 30, y consultar a un asistente IA especializado.
 
 ---
@@ -94,7 +96,7 @@ La app estará disponible en `https://TU-USUARIO.github.io/TU-REPO/` en 1–2 mi
 | GitHub Pages | Free | $0/mes |
 | Cloudflare Workers | Free (100k req/día) | $0/mes |
 | Cloudflare Rate Limiter | Incluido en Workers Free | $0/mes |
-| Anthropic Claude API | Pay-per-use | ~$3–8/mes (uso normal PyME) |
+| Anthropic Claude API (`claude-haiku-4-5`) | Pay-per-use — $1/$5 por MTok input/output | ~$1–3/mes (uso normal PyME) |
 
 ---
 
